@@ -1,0 +1,153 @@
+/*Stylesheet for the web application*/
+
+*
+{
+    margin: 0;   
+    padding: 0;    
+}
+header
+{
+    background-color: #90c2e7;    
+    height: 150px; 
+    margin:0 auto;        
+}
+header h1
+{
+    font-size: 90px;
+    font-family: "Century Gothic";
+    color: #113d44;
+    font-weight: bold; 
+    position: absolute;
+    left: 22%;   
+    top: 1%;
+}
+header h2
+{
+    font-size: 30px;
+    font-family: "Century Gothic";
+    color: #113d44;
+    font-weight: bold; 
+    position: absolute;
+    right: 15%;
+    top: 10%;
+}
+header img
+{
+    position: absolute;
+    left: 15%;
+    padding-top: 10px;    
+}
+header div.navigation_bar
+{
+    background-color: #4e8098;
+    position: absolute;
+    top: 14%;
+    width: 100%;
+    height: 4%;
+    text-align: center;
+}
+header div.navigation_bar a
+{
+    font-family: "Century Gothic";
+    font-size: 30px;
+    display: inline-block;
+    color: white;       
+    text-decoration: none;
+    padding-left: 3%;  
+    padding-right: 3%; 
+    height: 100%;
+}
+header div.navigation_bar a:hover
+{
+    background-color: #1b303a
+}
+h1
+{
+    font-size: 90px;
+    font-family: "Century Gothic";
+    color: #113d44;
+    font-weight: normal; 
+    position: absolute;
+    left: 37%;  
+    top: 20%;
+}
+
+body div.phone img
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    width: 50%;
+}
+body div.phone p
+{
+    font-family: "Century Gothic";
+    font-size: 30px;    
+    width: 50%;
+    text-align: center;
+    position: absolute;
+    left: 25%;
+    background-color: lightgray;
+    
+}
+body div.camera img
+{
+    display: block;
+    margin-left: 25%;    
+    margin-top: 10%;
+    width: 20%;
+}
+body div.camera p
+{
+    font-family: "Century Gothic";
+    font-size: 25px;    
+    width: 20%;
+    text-align: center;
+    position: absolute;
+    left: 25%;
+    background-color: lightgray;    
+}
+body div.laptop img
+{
+    display: block;
+    margin-left: 50%;    
+    margin-top: -15.7%; 
+    width: 25%;
+}
+body div.laptop p
+{
+    font-family: "Century Gothic";
+    font-size: 25px;    
+    width: 25%;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    background-color: lightgray;    
+}
+footer
+{
+    background-color: #092327;
+    position: absolute;
+    top: 160%;
+    width: 100%;
+    height: 10%;   
+}
+footer h3
+{
+    font-family: "Century Gothic";
+    font-size: 40px;    
+    color: white;       
+    text-decoration: none;
+    padding-left: 3%;  
+    padding-right: 3%;    
+}
+footer a
+{
+    font-family: "Century Gothic";
+    font-size: 20px;    
+    color: white;      
+    padding-left: 3%;  
+    padding-right: 3%;  
+     
+}
