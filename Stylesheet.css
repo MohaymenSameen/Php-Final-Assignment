@@ -155,7 +155,7 @@ footer a
 body div.background_color
 {    
     background-image: linear-gradient(0deg,#043871, #00a9a5);
-    height: 880px;
+    height: 920px;
     text-align: center;    
 }
 body div.background_color form.login_form
@@ -210,4 +210,50 @@ body div.background_color form.login_form input[type=submit]
     background-image: linear-gradient(90deg, #025f5e,#043871);
     padding: auto;
 }
+body div.background_color form.registration_form
+{
+    background-color: white;
+    width: 500px; 
+    height:700px;   
+    position: absolute;
+    left: 40%;
+    top: 25%;
+    padding: auto;
+    border-radius: 10px;
+    text-align: center;
+}
+body div.background_color form.registration_form h1
+{
+    position: static;
+    font-weight: bold;
+    font-size: 80px;
+    text-align: center;
+}
+body div.background_color form.registration_form input[type=text]
+{
+    background-color: rgb(236, 236, 236);;
+    width: 400px;
+    height:7%;
+    position: relative;
+    top: 20%;
+    border: none;       
+    font-size: 20px; 
+    font-family: "Century Gothic";
+    padding: 10px;
+    border-radius: 10px;        
+}
+body div.background_color form.registration_form input[type=submit]
+{
+    width: 70%;
+    height: 8%;
+    border-radius: 10px;
+    font-size: 35px;
+    font-family: "Century Gothic";    
+    color: white;
+    border: none;
+    background-image: linear-gradient(90deg, #025f5e,#043871);
+    padding: auto;
+}
+
+
 
