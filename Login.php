@@ -8,7 +8,7 @@
         $password=$_POST['password'];
         
 
-        $sql="select * FROM login WHERE email_address='".$email."'AND password='".$password."'";        
+        $sql="select * FROM register WHERE email_address='".$email."'AND password='".$password."'";        
         
         
         $result=mysqli_query($conn,$sql);
@@ -59,7 +59,7 @@
             <input type="text" name="email_address" placeholder="Email"><br><br><br>            
             <input type="password" name="password" placeholder="Password"><br><br><br>
             <input type="submit" name="Login" value="Login"><br><br><br><br>
-            <a href="FgtPass">Forgot Password?<br><br><br></a>
+            <a href="forgotpass.php">Forgot Password?<br><br><br></a>
             <a href="Register.php">Don't have an account?<br><strong>Sign Up</strong></a><br><br>
         </form>
     </div> 

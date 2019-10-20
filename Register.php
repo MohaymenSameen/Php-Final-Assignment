@@ -1,3 +1,47 @@
+<?php
+
+    if(isset($_POST['register']))
+    {
+        include_once 'Db_Connection/db.connection.php';
+
+        $firstname=$_POST['firstname'];
+        $lastname=$_POST['lastname'];
+        $email_address=$_POST['email_address'];
+        $password=$_POST['password'];
+
+        $checkemail = "SELECT `email_address` FROM `register` WHERE `email_address` = '".$_POST['email_address']."'" or exit(mysqli_error($conn));
+        $result=mysqli_query($conn,$checkemail);
+
+        if(mysqli_num_rows($result))
+        {
+            exit('This email is already being used');
+        }
+
+        
+        session_start();
+        $code=$_SESSION['captcha'];
+        $user=$_POST['captcha'];
+        if($code==$user) 
+        {
+            echo "valid";         
+                   
+        }
+        else
+        {
+            echo "invalid";
+            exit(mysqli_error($conn));
+        }
+        
+
+        $sql = "INSERT INTO register (firstname,lastname,email_address,password)
+        VALUES ('$firstname','$lastname','$email_address','$password')";
+        
+        mysqli_query($conn,$sql);
+
+        
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,13 +69,14 @@
     </header>
 
     <div class="background_color">
-        <form class="registration_form">
+        <form class="registration_form" method="POST" action="#">
             <h1>Register</h1><br><br>            
-            <input type="text" name="Firstname" placeholder="First Name"><br><br>
-            <input type="text" name="Lastname" placeholder="Last Name"><br><br>
-            <input type="text" name="Email" placeholder="Email Address"><br><br>            
-            <input type="text" name="Password"  placeholder="Password"><br><br><br><br>
-            <input type="submit" name="Register" value="Register"><br><br><br><br>
+            <input type="text" name="firstname" placeholder="First Name"><br><br>
+            <input type="text" name="lastname" placeholder="Last Name"><br><br>
+            <input type="text" name="email_address" placeholder="Email Address"><br><br>            
+            <input type="text" name="password"  placeholder="Password"><br><br>
+            <input type="text" name="captcha" placeholder="Enter Captcha" ><img src="captcha.php"><br><br>
+            <input type="submit" name="register" value="Register"><br><br><br><br>
 
         </form>
     </div>
