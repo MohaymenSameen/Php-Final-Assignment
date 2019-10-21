@@ -7,7 +7,14 @@
         $firstname=$_POST['firstname'];
         $lastname=$_POST['lastname'];
         $email_address=$_POST['email_address'];
-        $password=$_POST['password'];
+        $password=$_POST['password'];        
+    
+       
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+           
+           
+
+        
 
         $checkemail = "SELECT `email_address` FROM `register` WHERE `email_address` = '".$_POST['email_address']."'" or exit(mysqli_error($conn));
         $result=mysqli_query($conn,$checkemail);
@@ -34,7 +41,7 @@
         
 
         $sql = "INSERT INTO register (firstname,lastname,email_address,password)
-        VALUES ('$firstname','$lastname','$email_address','$password')";
+        VALUES ('$firstname','$lastname','$email_address','$hash')";
         
         mysqli_query($conn,$sql);
 

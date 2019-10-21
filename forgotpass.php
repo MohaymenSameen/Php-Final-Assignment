@@ -1,3 +1,23 @@
+<?php
+
+    if(isset($_POST['change']))
+    {
+        include_once 'Db_Connection/db.connection.php';
+        
+        $email_address=$_POST['email_address'];
+        $password=$_POST['password'];
+        $confpassword=$_POST['confirm_password'];
+
+        
+    
+    }
+
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,3 +54,6 @@
             <input type="submit" name="change" value="Change Password"><br><br><br>   
         </form>
     </div> 
+
+</body>
+</html>

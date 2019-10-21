@@ -1,29 +1,34 @@
-<?php
+<?php    
 
-    if(isset($_POST['email_address']))
+    if (isset($_POST['Login']))
     {
-        include_once 'Db_Connection/db.connection.php';
-           
-        $email=$_POST['email_address'];
-        $password=$_POST['password'];
-        
+		include_once 'Db_Connection/db.connection.php';
 
-        $sql="select * FROM register WHERE email_address='".$email."'AND password='".$password."'";        
-        
-        
-        $result=mysqli_query($conn,$sql);
+		$email = mysqli_real_escape_string($conn,$_POST['email_address']);
+		$password = mysqli_real_escape_string($conn,$_POST['password']);
 
-        if(mysqli_num_rows($result)==1)
+        $sql = "SELECT register_ID, password FROM register WHERE email_address='$email'";
+        $result = mysqli_query($conn,$sql);
+
+        if (mysqli_num_rows($result) > 0)
         {
-            echo "You have logged in!";
-            exit();
-        }
+		    $data = mysqli_fetch_array($result);
+            if (password_verify($password, $data['password']))
+            {
+		        exit("You have been logged In!");
+            } 
+            else
+            {
+                exit("Wrong password email combination");
+            }
+			   
+        } 
         else
         {
-            echo "You have entered incorrect email or password";
-            exit();
+            exit ("wrong password email combination");
         }
-    }
+           
+	}   
 ?>
 
 <!DOCTYPE html>
