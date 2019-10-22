@@ -1,16 +1,34 @@
 <?php
 
-    if(isset($_POST['change']))
+    if(isset($_GET['email_address']))
     {
         include_once 'Db_Connection/db.connection.php';
         
-        $email_address=$_POST['email_address'];
-        $password=$_POST['password'];
-        $confpassword=$_POST['confirm_password'];
+        $email_address=mysqli_real_escape_String($conn,$_GET['email_address']);
+        $confpassword= mysqli_real_escape_string($conn,$_POST['password']);
+        
+            
 
+        $sql="SELECT register_ID FROM register WHERE email_address='$email_address'";
+        $result=mysqli_query($conn,$sql);
 
-    
+        if(mysqli_num_rows($result)>0)
+        {      
+            $hash = password_hash($confpassword, PASSWORD_BCRYPT);
+            $sql = "UPDATE register SET password='$hash' WHERE email_address='$email'";
+            $result= mysqli_query($conn,$sql);
+        }
+        else
+        {
+            exit("Error occured!!");
+        }
+
     }
+    else
+    {
+        header("Location: login.php");
+    }
+
 
 ?>
 <!DOCTYPE html>

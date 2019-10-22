@@ -1,12 +1,28 @@
-<?php
+<?php  
+    
 
     if(isset($_POST['change']))
     {
         include_once 'Db_Connection/db.connection.php';
         
-        $email_address=$_POST['email_address'];
-        $password=$_POST['password'];
-        $confpassword=$_POST['confirm_password'];    
+        $email_address=mysqli_real_escape_String($conn,$_POST['email_address']);
+
+        $sql="SELECT register_ID FROM register WHERE email_address='$email_address'";
+        $result=mysqli_query($conn,$sql);
+        
+        if(mysqli_num_rows($result)>0)
+        {
+            $url="http://627650.infhaarlem.nl/reset-password.php?email_address=$email_address";
+            mail($email,"Reset Password","To reset your password, please click the link: $url","From: randomemail@domain.com\r\n");
+            exit ("Password reset link has been sent to your email");
+
+        }
+        else
+        {
+            exit ("Email does not exist");
+        }        
+        
+          
     }
     
 
@@ -40,9 +56,9 @@
     
     <div class="background_color">
         <form class="forgot_password_form" method="POST" ation="#">
-            <h1>Reset Password</h1><br><br>            
+            <h1>Forgot Password</h1><br><br>            
             <input type="text" name="email_address" placeholder="Email"><br><br>            
-            <input type="submit" name="change" value="Reset Password"><br><br><br>   
+            <input type="submit" name="change" value="Forgot Password"><br><br><br>   
         </form>
     </div> 
 
