@@ -6,9 +6,11 @@
         
         $email_address=$_POST['email_address'];
         $password=$_POST['password'];
-        $confpassword=$_POST['confirm_password'];    
-    }
+        $confpassword=$_POST['confirm_password'];
+
+
     
+    }
 
 ?>
 <!DOCTYPE html>
@@ -18,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/Stylesheet.css">
-    <title>Forgot Password</title>
+    <title>Login</title>
 </head>
 <body>
 
@@ -40,9 +42,11 @@
     
     <div class="background_color">
         <form class="forgot_password_form" method="POST" ation="#">
-            <h1>Reset Password</h1><br><br>            
+            <h1>Change Password</h1><br><br>            
             <input type="text" name="email_address" placeholder="Email"><br><br>            
-            <input type="submit" name="change" value="Reset Password"><br><br><br>   
+            <input type="password" name="password" placeholder="Password"><br><br>
+            <input type="password" name="confirm_password" placeholder="Confirm Password"><br><br>            
+            <input type="submit" name="change" value="Change Password"><br><br><br>   
         </form>
     </div> 
 
