@@ -1,5 +1,5 @@
-<?php    
-
+<?php       
+    session_start();
     if (isset($_POST['Login']))
     {
 		include_once 'Db_Connection/db.connection.php';
@@ -10,12 +10,16 @@
         $sql = "SELECT register_ID, password FROM register WHERE email_address='$email'";
         $result = mysqli_query($conn,$sql);
 
+                
+        
+
         if (mysqli_num_rows($result) > 0)
         {
 		    $data = mysqli_fetch_array($result);
             if (password_verify($password, $data['password']))
-            {
-		        exit("You have been logged In!");
+            {                
+                $_SESSION['username']=$_POST['email_address'];
+                header("Location: profile.php");
             } 
             else
             {
@@ -27,7 +31,9 @@
         {
             exit ("wrong password email combination");
         }
-           
+
+        
+       
 	}   
 ?>
 
@@ -68,3 +74,5 @@
             <a href="Register.php">Don't have an account?<br><strong>Sign Up</strong></a><br><br>
         </form>
     </div> 
+</body>
+</html>

@@ -10,11 +10,7 @@
         $password=$_POST['password'];        
     
        
-        $hash = password_hash($password, PASSWORD_BCRYPT);
-           
-           
-
-        
+        $hash = password_hash($password, PASSWORD_BCRYPT);       
 
         $checkemail = "SELECT `email_address` FROM `register` WHERE `email_address` = '".$_POST['email_address']."'" or exit(mysqli_error($conn));
         $result=mysqli_query($conn,$checkemail);

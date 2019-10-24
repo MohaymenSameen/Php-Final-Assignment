@@ -26,7 +26,7 @@
     }
     else
     {
-        header("Location: login.php");
+        header("Location: Login.php");
     }
 
 
@@ -38,7 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/Stylesheet.css">
-    <title>Login</title>
+    <title>Reset Password</title>
 </head>
 <body>
 
@@ -59,7 +59,7 @@
     </header>    
     
     <div class="background_color">
-        <form class="forgot_password_form" method="POST" ation="#">
+        <form class="reset_password_form" method="POST" ation="#">
             <h1>Change Password</h1><br><br>            
             <input type="text" name="email_address" placeholder="Email"><br><br>            
             <input type="password" name="password" placeholder="Password"><br><br>

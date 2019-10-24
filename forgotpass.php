@@ -20,11 +20,9 @@
         else
         {
             exit ("Email does not exist");
-        }        
-        
+        }         
           
-    }
-    
+    }   
 
 ?>
 <!DOCTYPE html>

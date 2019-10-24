@@ -1,4 +1,3 @@
-
 <html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/Stylesheet.css">    
-    <title>Home</title>
+    <title>Logged in</title>
 </head>
 
 <body>   
@@ -14,16 +13,26 @@
     <header>        
         <img src="/img/logo.png">
         <h1>TechnoGuides</h1>
-        <h2>Your only reliable source for tech news</h2>
-   
+        <h2>Your only reliable source for tech news</h2>           
+        <?php
+        session_start();
+
+            if(isset($_SESSION['username']))
+            {
+                echo "<h3>".$_SESSION['username']."</h3>";
+            }
+        ?> 
+        
         <div class="navigation_bar">
             
-            <a href="home.php">Home</a>
+            <a href="profile.php">Home</a>
             <a href="#Laptops">Laptops</a>
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a>
-            <a href="Login.php"><strong>Join/Sign In</strong></a>
+            <a href="#Tvs">Tvs</a>                     
+            <a href="#">Edit Details</a>
+            <a href="login.php">Logout</a>
+               
         </div>
     </header>
     
