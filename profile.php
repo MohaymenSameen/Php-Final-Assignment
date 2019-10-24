@@ -19,7 +19,11 @@
 
             if(isset($_SESSION['username']))
             {
-                echo "<h3>".$_SESSION['username']."</h3>";
+                echo "<h3>".$_SESSION['username']."</h3>";                                
+            }
+            else
+            {
+                header("Location: home.php");
             }
         ?> 
         
@@ -30,8 +34,8 @@
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>
             <a href="#Tvs">Tvs</a>                     
-            <a href="#">Edit Details</a>
-            <a href="login.php">Logout</a>
+            <a href="edit_user.php">Edit Details</a>
+            <a href="logout.php?logout">Logout</a>
                
         </div>
     </header>

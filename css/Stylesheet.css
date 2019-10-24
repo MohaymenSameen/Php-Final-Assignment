@@ -360,16 +360,68 @@ body div.background_color form.reset_password_form input[type=password]
     border-radius: 10px;
 }
 header h3
-{
-    
+{    
     font-size: 20px;
     font-family: "Century Gothic";
     color: #113d44;
     font-weight: bold; 
     position: absolute;
     right: 10%;
-    top: 1%;
-    
+    top: 1%;    
 } 
+body div.background_color form.edit_details_form
+{
+    background-color: white;
+    width: 500px;      
+    position: absolute;
+    left: 37.5%;
+    top: 25%;
+    padding: auto;
+    border-radius: 10px;
+}
+body div.background_color form.edit_details_form h1
+{
+    position: static;
+    font-weight: bold;
+    font-size: 70px;    
+}
+body div.background_color form.edit_details_form input[type=text]
+{
+    background-color: rgb(236, 236, 236);;
+    width: 80%;
+    height:7%;
+    position: relative;
+    top: 20%;
+    border: none;       
+    font-size: 25px; 
+    font-family: "Century Gothic";
+    padding: 10px;
+    border-radius: 10px;
+}
+body div.background_color form.edit_details_form input[type=password]
+{
+    background-color: rgb(236, 236, 236);;
+    width: 80%;
+    height:7%;
+    position: relative;
+    top: 20%;
+    border: none;       
+    font-size: 25px; 
+    font-family: "Century Gothic";
+    padding: 10px;
+    border-radius: 10px;
+}
+body div.background_color form.edit_details_form input[type=submit]
+{
+    width: 70%;
+    height: 8%;
+    border-radius: 10px;
+    font-size: 30px;
+    font-family: "Century Gothic";    
+    color: white;
+    border: none;
+    background-image: linear-gradient(90deg, #025f5e,#043871);
+    padding: 5px;
+}
 
 
