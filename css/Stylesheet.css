@@ -423,5 +423,14 @@ body div.background_color form.edit_details_form input[type=submit]
     background-image: linear-gradient(90deg, #025f5e,#043871);
     padding: 5px;
 }
+h4
+{
+    font-size: 20px;
+    font-family: "Century Gothic";
+    color: #113d44;
+    font-weight: bold; 
+   
+}
+
 
 
