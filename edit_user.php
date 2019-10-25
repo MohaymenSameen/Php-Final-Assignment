@@ -90,10 +90,7 @@
                         {
                             exit ("Error has happened");
                         }
-                    }
-                    
-
-                   
+                    }                
                 }
             ?>                  
             <input type="submit" name="change" value="Save Changes"><br><br><br>   

@@ -1,11 +1,13 @@
 <?php
 
-    if(isset($_GET['email_address']))
+    session_start();
+    if(isset($_POST['email_address']))
     {
         include_once 'Db_Connection/db.connection.php';
         
-        $email_address=mysqli_real_escape_String($conn,$_GET['email_address']);
-        $confpassword= mysqli_real_escape_string($conn,$_POST['password']);
+        $email_address=mysqli_real_escape_String($conn,$_POST['email_address']);
+        $password=mysqli_real_escape_String($conn,$_POST['password']);
+        $confpassword= mysqli_real_escape_string($conn,$_POST['confirm_password']);
         
             
 
@@ -13,21 +15,33 @@
         $result=mysqli_query($conn,$sql);
 
         if(mysqli_num_rows($result)>0)
-        {      
-            $hash = password_hash($confpassword, PASSWORD_BCRYPT);
-            $sql = "UPDATE register SET password='$hash' WHERE email_address='$email'";
-            $result= mysqli_query($conn,$sql);
+        {     
+            if(empty($password) && empty($confpassword))
+            {
+                exit ("Please enter you new password");
+            } 
+            else if($password!=$confpassword)
+            {
+                exit ("Passwords do not match!");
+            }
+            else
+            {
+                $hash = password_hash($confpassword, PASSWORD_BCRYPT);
+                $sql = "UPDATE `register` SET password='$hash' WHERE email_address='{$_SESSION['username']}'";
+                $result= mysqli_query($conn,$sql);
+            }
+            
         }
         else
         {
-            exit("Error occured!!");
+            exit("Email does not exist!!");
         }
 
     }
-    else
+    /*else
     {
         header("Location: Login.php");
-    }
+    }*/
 
 
 ?>
