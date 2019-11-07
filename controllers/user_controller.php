@@ -3,12 +3,12 @@ require_once '../models/user_model.php';
 
 class UserController extends UserModel
 {
-
+    
     public function Login($email_address,$password)
     {
         if(!empty($email_address) && !empty($password))
         {
-            $UserObject=new UserModel();
+            $UserObject=new UserModel($email_address,$password);
             
             if($UserObject->getUser($email_address,$password))
             {

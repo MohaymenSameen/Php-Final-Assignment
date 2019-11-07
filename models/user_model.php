@@ -37,6 +37,30 @@
         }*/
 
             
+            public $email_address;
+            public $password;
+
+            public function __construct($email_address,$password)
+            {
+                $this->email_address=$email_address;
+                $this->password=$password;
+            } 
+            function getEmailAddress()
+            {
+                return $this->email_address;
+            }      
+            function setEmailAddress($email_address)
+            {
+                $this->email_address=$email_address;
+            }  
+            function getPassword()
+            {
+                return $this->password;
+            }
+            function setPassword($password)
+            {
+                return $this->password=$password;
+            }            
             
             public function getUser($email_address,$password)
             {

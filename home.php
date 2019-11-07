@@ -23,7 +23,7 @@
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>
             <a href="#Tvs">Tvs</a>
-            <a href="/views/login.php"><strong>Join/Sign In</strong></a>
+            <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
         </div>
     </header>
     

@@ -1,6 +1,6 @@
 <?php
 
-class database
+class Database
     {
         //Declaring Variables       
         private $dbServername;

@@ -1,20 +1,15 @@
 <?php
-require_once '../controllers/user_controller.php';
-require_once ('../models/user_model.php');
+    require_once ('../controllers/login_controller.php');
+    require_once ('../models/login_model.php');   
 
     if(isset($_POST['Login']))
     {
-        $email_address=$_POST['email_address'];
-        $password=$_POST['password'];
+        $email_address=($_POST['email_address']);
+        $password=($_POST['password']);
 
-        $userObject = new UserController($email_address,$password);
-        $userObject->Login($email_address,$password);
-
+        $LoginController = new LoginController($email_address,$password);
+        $LoginController->Login($email_address,$password);
     }
-    /*if(isset($_SESSION['user']))
-    {
-        header("Location/ profile.php");
-    }*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +34,7 @@ require_once ('../models/user_model.php');
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>
             <a href="#Tvs">Tvs</a>
-            <a href="Login.php"><strong>Join/Sign In</strong></a>
+            <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
         </div>
     </header>    
     
@@ -50,7 +45,7 @@ require_once ('../models/user_model.php');
             <input type="password" name="password" placeholder="Password"><br><br><br>
             <input type="submit" name="Login" value="Login"><br><br><br><br>
             <a href="forgotpass.php">Forgot Password?<br><br><br></a>
-            <a href="Register.php">Don't have an account?<br><strong>Sign Up</strong></a><br><br>
+            <a href="/views/register_view.php">Don't have an account?<br><strong>Sign Up</strong></a><br><br>
         </form>
     </div> 
 </body>
