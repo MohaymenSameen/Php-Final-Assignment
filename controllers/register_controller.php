@@ -15,16 +15,18 @@
         public function addUser($firstname,$lastname,$email_address,$password)
         {  
      
-            if(!empty($email_address))
+            if(!empty($email_address) && !empty($password))
             {
-                $RegisterModel=new RegisterModel($firstname,$lastname,$email_address,$password);    
-
-            }   
-            else
-            {
-                echo "erro";
-            }  
-           
+                $RegisterModel=new RegisterModel($firstname,$lastname,$email_address,$password);
+                if($RegisterModel->inputUser($firstname,$lastname,$email_address,$password))
+                {
+                    echo "User verified";
+                }
+                else
+                {
+                    echo "Wrong password stuff";
+                }
+            } 
                 
         }
     }

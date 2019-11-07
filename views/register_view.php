@@ -9,8 +9,8 @@
             $email_address=$_POST['email_address'];
             $password=$_POST['password'];  
 
-            $RegisterModel = new RegisterModel($firstname,$lastname,$email_address,$password);
-            $RegisterModel->inputUser($firstname,$lastname,$email_address,$password);
+            $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password);
+            $RegisterController->addUser($firstname,$lastname,$email_address,$password);
             session_start();
             $code=$_SESSION['captcha'];
             $user=$_POST['captcha'];
