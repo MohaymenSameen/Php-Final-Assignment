@@ -1,16 +1,14 @@
 <?php
     require_once ('../controllers/register_controller.php');
     require_once ('../models/register_model.php');    
-   
+    
         if(isset($_POST['register']))
         {
             $firstname=$_POST['firstname'];
             $lastname=$_POST['lastname'];
             $email_address=$_POST['email_address'];
             $password=$_POST['password'];  
-
-            $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password);
-            $RegisterController->addUser($firstname,$lastname,$email_address,$password);
+            
             session_start();
             $code=$_SESSION['captcha'];
             $user=$_POST['captcha'];
@@ -23,8 +21,8 @@
                 echo "invalid";
                 
             }    
-            
-             
+            $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password);
+            $RegisterController->addUser($firstname,$lastname,$email_address,$password);
         }
 ?>
 <!DOCTYPE html>
@@ -44,7 +42,7 @@
     
         <div class="navigation_bar">
             
-            <a href="home.php">Home</a>
+            <a href="/views/home_view.php">Home</a>
             <a href="#Laptops">Laptops</a>
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>

@@ -1,6 +1,7 @@
 <?php
     require_once ('../Db_Connection/db.connection.php');
-    class RegisterModel extends Database
+
+    class EditUserModel extends Database
     {
         public $firstname;
         public $lastname;
@@ -45,37 +46,30 @@
         public function setPassword()
         {
             $this->password=$password;
-        }        
-        public function inputUser($firstname,$lastname,$email_address,$password)
-        {
-            $hash=password_hash($password, PASSWORD_BCRYPT);
-            $sql = "INSERT INTO register (firstname,lastname,email_address,password)
-            VALUES ('$firstname','$lastname','$email_address','$hash')";
-            $result=$this->connect()->query($sql); 
-            if($result===TRUE)
-            {
-                return $result;
-            }           
         }
-        public function validateEmail($email_address)
+        public function getUser()
         {
-            $validate="SELECT `email_address` FROM `register` WHERE `email_address`='".$email_address."'"; //or exit($this->connect()->error);
-            $result=$this->connect()->query($validate);
-            $numRows=$result->num_rows;            
-            if($numRows>0)
+            session_start();
+            $sql="SELECT * FROM register WHERE email_address='{$_SESSION['username']}'";
+            $result = $this->connect()->query($sql);              
+            $row=$result->fetch_assoc();
+            while($row)
             {
-                $row=$result->fetch_array();
-                $data=$row;
-                return $data;
-            }                                   
+                $rows[]=$row;                
+                return $rows;                
+            }
         }
-        
-
-        
-
+        public function updateUser($firstname,$lastname,$email_address,$password)
+        {            
+            $sql="UPDATE `register` SET firstname='$firstname',lastname='$lastname',email_address='$email_address' WHERE email_address='{$_SESSION['username']}'";
+            $result = $this->connect()->query($sql);            
+        }
+        public function updatePass($firstname,$lastname,$email_address,$password)
+        {
+            //session_start();
+            $hash = password_hash($password, PASSWORD_BCRYPT);
+            $sql="UPDATE `register` SET firstname='$firstname',lastname='$lastname',email_address='$email_address',password='$hash' WHERE email_address='{$_SESSION['username']}'";
+            $result = $this->connect()->query($sql);            
+        }
     }
-
-
-
-
 ?>

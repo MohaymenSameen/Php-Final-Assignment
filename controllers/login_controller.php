@@ -9,7 +9,8 @@
                 $LoginModel=new LoginModel($email_address,$password);
                 if($LoginModel->getUser($email_address,$password))
                 {
-                    echo "User verified";
+                    $_SESSION['username']=$email_address;
+                    header("Location: profile_view.php");
                 }
                 else
                 {
