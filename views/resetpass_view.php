@@ -9,7 +9,6 @@
         $confpassword=$_POST['confirm_password'];
 
         $ResetPassController=new ResetPassController($email_address,$password);
-        $ResetPassController->validateEmail($email_address,$password);
         $ResetPassController->changePass($email_address,$password,$confpassword);
     }
 ?>

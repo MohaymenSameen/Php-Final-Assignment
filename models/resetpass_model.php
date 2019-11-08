@@ -33,9 +33,9 @@
             $numRows=$result->num_rows;            
             if($numRows>0)
             {
-                //$row=$result->fetch_array();
-                //$data=$row;
-                return true;
+                $row=$result->fetch_array();
+                $data=$row;
+                return $row;
             }
         }
         public function updatePass($password)
