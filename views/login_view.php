@@ -44,7 +44,7 @@
             <input type="text" name="email_address" placeholder="Email"><br><br><br>            
             <input type="password" name="password" placeholder="Password"><br><br><br>
             <input type="submit" name="Login" value="Login"><br><br><br><br>
-            <a href="/views/forgotpass_view.php">Forgot Password?<br><br><br></a>
+    <!--remember to change name!-->        <a href="/views/resetpass_view.php">Forgot Password?<br><br><br></a>
             <a href="/views/register_view.php">Don't have an account?<br><strong>Sign Up</strong></a><br><br>
         </form>
     </div> 

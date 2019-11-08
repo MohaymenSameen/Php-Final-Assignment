@@ -41,7 +41,7 @@
         public function updatePass($password)
         {
             session_start();
-            $hash = password_hash($confpassword, PASSWORD_BCRYPT);
+            $hash = password_hash($password, PASSWORD_BCRYPT);
             $sql = "UPDATE `register` SET password='$hash' WHERE email_address='{$_SESSION['username']}'";
             $result=$this->connect()->query($sql); 
         }

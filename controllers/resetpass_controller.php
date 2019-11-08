@@ -13,6 +13,8 @@
         }
         public function changePass($email_address,$password,$confpassword)
         {
+            $ResetPassModel=new ResetPassModel($email_address,$password);
+
             if($this->validateEmail($email_address,$password))
             {
                 if(empty($password) && empty($confpassword))
