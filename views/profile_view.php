@@ -24,18 +24,18 @@
             else
             {
                 header("Location: home_view.php");
-            }
+            }            
         ?> 
         
         <div class="navigation_bar">
             
-            <a href="profile_view.php">Home</a>
+            <a href="home_view.php">Home</a>
             <a href="#Laptops">Laptops</a>
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>
             <a href="#Tvs">Tvs</a>                     
             <a href="edituser_view.php">Edit Details</a>
-            <a href="logout_view.php?logout">Logout</a>
+            <a href="logout_view.php?logout"><strong>Logout</strong></a>
                
         </div>
     </header>

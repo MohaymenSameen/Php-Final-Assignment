@@ -2,8 +2,10 @@
     if(isset($_GET['logout']))
     {
         session_start();       
-        session_destroy();
+        session_destroy();        
+        header("Cache-Control: no-store, no-cache");
+        setcookie("username","",time()-3600);
         header("Location: login_view.php");
-        header("Cache-Control: no-store, no-cache, must-revalidate");
+        
     }    
 ?>
