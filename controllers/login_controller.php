@@ -7,10 +7,20 @@
             if(!empty($email_address) && !empty($password))
             {
                 $LoginModel=new LoginModel($email_address,$password);
-                if($LoginModel->getUser($email_address,$password))
+                $GetUser=$LoginModel->getUser($email_address,$password);
+                
+                if($GetUser)
                 {
-                    $_SESSION['username']=$email_address;
-                    header("Location: profile_view.php");
+                    if(password_verify($password,$GetUser['password']))
+                    {
+                        $_SESSION['username']=$email_address;
+                        header("Location: profile_view.php");
+                    }
+                    else
+                    {
+                        echo "Passwords dont match!!!";
+                    }
+                    
                 }
                 else
                 {

@@ -19,7 +19,7 @@
             if (password_verify($password, $data['password']))
             {                
                 $_SESSION['username']=$_POST['email_address'];
-                header("Location: profile.php");
+            header("Location: profile.php");
             } 
             else
             {
