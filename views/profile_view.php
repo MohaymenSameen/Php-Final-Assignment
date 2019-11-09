@@ -23,7 +23,7 @@
             }
             else
             {
-                header("Location: home.php");
+                header("Location: home_view.php");
             }
         ?> 
         

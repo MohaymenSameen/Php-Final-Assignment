@@ -1,13 +1,14 @@
 <?php
+    require_once ('../Db_Connection/db.connection.php');
     require_once ('../controllers/login_controller.php');
-    require_once ('../models/login_model.php');   
+    //require_once ('../models/login_model.php');   
 
     if(isset($_POST['Login']))
-    {
-        $email_address=($_POST['email_address']);
-        $password=($_POST['password']);
-
-        $LoginController = new LoginController($email_address,$password);
+    {      
+        $mysqli=new Database();        
+        $email_address=$mysqli->escape_string($_POST['email_address']);
+        $password=$mysqli->escape_string($_POST['password']);  
+        $LoginController = new LoginController($email_address,$password);      
         $LoginController->Login($email_address,$password);
     }
 ?>
@@ -44,7 +45,7 @@
             <input type="text" name="email_address" placeholder="Email"><br><br><br>            
             <input type="password" name="password" placeholder="Password"><br><br><br>
             <input type="submit" name="Login" value="Login"><br><br><br><br>
-            <a href="/views/resetpass_view.php">Forgot Password?<br><br><br></a>
+            <a href="/views/forgotpass_view.php">Forgot Password?<br><br><br></a>
             <a href="/views/register_view.php">Don't have an account?<br><strong>Sign Up</strong></a><br><br>
         </form>
     </div> 

@@ -2,12 +2,12 @@
     require_once ('../models/register_model.php');    
     class RegisterController extends RegisterModel
     {       
-        public function addUser($firstname,$lastname,$email_address,$password)
+        public function addUser(string $firstname,string $lastname,string $email_address,string $password,string $registration_date)
         {  
      
             if(!empty($email_address) && !empty($password))
             {
-                $RegisterModel=new RegisterModel($firstname,$lastname,$email_address,$password);       
+                $RegisterModel=new RegisterModel($firstname,$lastname,$email_address,$password,$registration_date);       
                 
                 if($RegisterModel->validateEmail($email_address))
                 {
@@ -15,7 +15,7 @@
                 }
                 else
                 {
-                    $RegisterModel->inputUser($firstname,$lastname,$email_address,$password);
+                    $RegisterModel->inputUser($firstname,$lastname,$email_address,$password,$registration_date);
                 }
                 
                 /*if($RegisterModel->inputUser($firstname,$lastname,$email_address,$password))

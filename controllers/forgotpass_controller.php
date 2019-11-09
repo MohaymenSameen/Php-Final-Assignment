@@ -2,7 +2,7 @@
     require_once ('../models/forgotpass_model.php');    
     class ForgotPassController extends ForgotPassModel
     {
-        public function sendEmail($email_address)
+        public function sendEmail(string $email_address)
         {
             if(!empty($email_address))
             {

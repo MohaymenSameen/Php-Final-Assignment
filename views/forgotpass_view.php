@@ -1,10 +1,12 @@
 <?php
+    require_once ('../Db_Connection/db.connection.php');
     require_once ('../controllers/forgotpass_controller.php');
-    require_once ('../models/forgotpass_model.php'); 
+    //require_once ('../models/forgotpass_model.php'); 
 
     if(isset($_POST['change']))
     {
-        $email_address=$_POST['email_address'];
+        $mysqli=new Database();        
+        $email_address=$mysqli->escape_string($_POST['email_address']);
         $ForgotPassController= new ForgotPassController($email_address);
         $ForgotPassController->sendEmail($email_address);        
     }

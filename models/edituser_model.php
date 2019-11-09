@@ -59,17 +59,22 @@
                 return $rows;                
             }
         }
-        public function updateUser($firstname,$lastname,$email_address,$password)
+        public function updateUser(string $firstname,string $lastname,string $email_address,string $password)
         {            
             $sql="UPDATE `register` SET firstname='$firstname',lastname='$lastname',email_address='$email_address' WHERE email_address='{$_SESSION['username']}'";
             $result = $this->connect()->query($sql);            
         }
-        public function updatePass($firstname,$lastname,$email_address,$password)
+        public function updatePass(string $firstname,string $lastname,string $email_address,string $password)
         {
             //session_start();
             $hash = password_hash($password, PASSWORD_BCRYPT);
             $sql="UPDATE `register` SET firstname='$firstname',lastname='$lastname',email_address='$email_address',password='$hash' WHERE email_address='{$_SESSION['username']}'";
             $result = $this->connect()->query($sql);            
+        }
+        public function deleteUser(string $email_address)
+        {
+            $sql="DELETE FROM `register` WHERE email_address='{$_SESSION['username']}'";
+            $result=$this->connect()->query($sql);                
         }
     }
 ?>

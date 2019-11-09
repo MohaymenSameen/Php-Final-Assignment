@@ -2,7 +2,7 @@
     require_once ('../models/resetpass_model.php');
     class ResetPassController extends ResetPassModel
     {        
-        public function changePass($email_address,$password,$confpassword)
+        public function changePass(string $email_address,string $password,string $confpassword)
         {
             $ResetPassModel=new ResetPassModel($email_address,$password);
 

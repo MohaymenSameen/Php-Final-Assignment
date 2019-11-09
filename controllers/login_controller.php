@@ -2,7 +2,7 @@
     require_once ('../models/login_model.php');
     class LoginController extends LoginModel
     {
-        public function Login($email_address,$password)
+        public function Login(string $email_address, string $password)
         {
             if(!empty($email_address) && !empty($password))
             {
@@ -19,12 +19,11 @@
                     else
                     {
                         echo "Passwords dont match!!!";
-                    }
-                    
+                    }                    
                 }
                 else
                 {
-                    echo "Wrong password stuff";
+                    echo "Email does not exist in database";
                 }
             }            
         }

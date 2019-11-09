@@ -26,7 +26,7 @@
         {
             $this->password=$password;
         }
-        public function checkEmail($email_address,$password)
+        public function checkEmail(string $email_address,string $password)
         {
             $sql="SELECT register_ID FROM register WHERE email_address='$email_address'";
             $result=$this->connect()->query($sql); 
@@ -38,7 +38,7 @@
                 return $row;
             }
         }
-        public function updatePass($password)
+        public function updatePass(string $password)
         {
             session_start();
             $hash = password_hash($password, PASSWORD_BCRYPT);

@@ -1,13 +1,16 @@
 <?php
+    require_once ('../Db_Connection/db.connection.php');
     require_once ('../controllers/register_controller.php');
-    require_once ('../models/register_model.php');    
+    //require_once ('../models/register_model.php');    
     
         if(isset($_POST['register']))
         {
-            $firstname=$_POST['firstname'];
-            $lastname=$_POST['lastname'];
-            $email_address=$_POST['email_address'];
-            $password=$_POST['password'];  
+            $mysqli=new Database();
+            $firstname=$mysqli->escape_string($_POST['firstname']);
+            $lastname=$mysqli->escape_string($_POST['lastname']);
+            $email_address=$mysqli->escape_string($_POST['email_address']);
+            $password=$mysqli->escape_string($_POST['password']);
+            $registration_date=date('d-m-y H:i:s'); 
             
             session_start();
             $code=$_SESSION['captcha'];
@@ -20,9 +23,9 @@
             {
                 echo "invalid";
                 
-            }    
-            $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password);
-            $RegisterController->addUser($firstname,$lastname,$email_address,$password);
+            } 
+            $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password,$registration_date);
+            $RegisterController->addUser($firstname,$lastname,$email_address,$password,$registration_date);
         }
 ?>
 <!DOCTYPE html>

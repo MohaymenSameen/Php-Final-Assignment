@@ -1,12 +1,14 @@
 <?php
-    require_once ('../models/resetpass_model.php');
+    require_once ('../Db_Connection/db.connection.php');
+    //require_once ('../models/resetpass_model.php');
     require_once ('../controllers/resetpass_controller.php');
 
     if(isset($_POST['email_address']))
     {
-        $email_address=$_POST['email_address'];
-        $password=$_POST['password'];
-        $confpassword=$_POST['confirm_password'];
+        $mysqli=new Database();
+        $email_address=$mysqli->escape_string($_POST['email_address']);
+        $password=$mysqli->escape_string($_POST['password']);
+        $confpassword=$mysqli->escape_string($_POST['confirm_password']);
 
         $ResetPassController=new ResetPassController($email_address,$password);
         $ResetPassController->changePass($email_address,$password,$confpassword);

@@ -20,6 +20,10 @@ class Database
 
             return $conn;
         }
+        public function escape_string($value)
+        {
+            return $this->connect()->real_escape_string($value);
+        }
         /*if(!connect())
         {
             echo('Could not connect:');

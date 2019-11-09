@@ -6,13 +6,15 @@
         public $lastname;
         public $email_address;
         public $password;
+        public $registration_date;
 
-        public function __construct($firstname,$lastname,$email_address,$password)
+        public function __construct($firstname,$lastname,$email_address,$password,$registration_date)
         {
             $this->firstname=$firstname;
             $this->lastname=$lastname;
             $this->email_address=$email_address;
-            $this->password=$password;            
+            $this->password=$password;   
+            $this->registration_date=$registration_date;         
         }
         public function getFirstName()
         {
@@ -45,19 +47,28 @@
         public function setPassword()
         {
             $this->password=$password;
-        }        
-        public function inputUser($firstname,$lastname,$email_address,$password)
+        }
+        public function getRegistrationDate()
+        {
+            return $this->registration_date;
+        }
+        public function setRegistrationDate()
+        {
+            $this->registration_date=$registration_date;
+        }
+
+        public function inputUser(string $firstname,string $lastname,string $email_address,string $password,string $registration_date)
         {
             $hash=password_hash($password, PASSWORD_BCRYPT);
-            $sql = "INSERT INTO register (firstname,lastname,email_address,password)
-            VALUES ('$firstname','$lastname','$email_address','$hash')";
+            $sql = "INSERT INTO register (firstname,lastname,email_address,password,registration_date)
+            VALUES ('$firstname','$lastname','$email_address','$hash','$registration_date')";
             $result=$this->connect()->query($sql); 
             if($result===TRUE)
             {
                 return $result;
             }           
         }
-        public function validateEmail($email_address)
+        public function validateEmail(string $email_address)
         {
             $validate="SELECT `email_address` FROM `register` WHERE `email_address`='".$email_address."'"; //or exit($this->connect()->error);
             $result=$this->connect()->query($validate);
