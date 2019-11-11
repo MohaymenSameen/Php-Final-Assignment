@@ -20,6 +20,7 @@ class Database
 
             return $conn;
         }
+        //mysqli real escape string function to prevent sqli injection into the database
         public function escape_string($value)
         {
             return $this->connect()->real_escape_string($value);

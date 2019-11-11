@@ -33,7 +33,8 @@
             <a href="#Laptops">Laptops</a>
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a>                     
+            <a href="#Tvs">Tvs</a> 
+            <a href="/views/searchuser_view.php">Search User</a>                    
             <a href="edituser_view.php">Edit Details</a>
             <a href="logout_view.php?logout"><strong>Logout</strong></a>
                

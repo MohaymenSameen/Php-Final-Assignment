@@ -1,5 +1,7 @@
 <?php
+    //connection to the database
     require_once ('../Db_Connection/db.connection.php');
+    //class extends database
     class RegisterModel extends Database
     {
         public $firstname;
@@ -7,7 +9,7 @@
         public $email_address;
         public $password;
         public $registration_date;
-
+        //constructor 
         public function __construct($firstname,$lastname,$email_address,$password,$registration_date)
         {
             $this->firstname=$firstname;
@@ -16,6 +18,7 @@
             $this->password=$password;   
             $this->registration_date=$registration_date;         
         }
+        //getters and setters
         public function getFirstName()
         {
             return $this->firstname;
@@ -57,8 +60,10 @@
             $this->registration_date=$registration_date;
         }
 
+        //function to input users into database
         public function inputUser($firstname,$lastname,$email_address,$password,$registration_date)
         {
+            //password hash to encrypt password
             $hash=password_hash($password, PASSWORD_BCRYPT);
             $sql = "INSERT INTO register (firstname,lastname,email_address,password,registration_date)
             VALUES ('$firstname','$lastname','$email_address','$hash','$registration_date')";
@@ -68,6 +73,7 @@
                 return $result;
             }           
         }
+        //function to check whether the email is in the database
         public function validateEmail($email_address)
         {
             $validate="SELECT `email_address` FROM `register` WHERE `email_address`='".$email_address."'";

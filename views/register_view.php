@@ -1,40 +1,3 @@
-<?php
-    /*require_once ('../Db_Connection/db.connection.php');
-    require_once ('../controllers/register_controller.php');
-    //require_once ('../models/register_model.php');    
-    
-        //session_start();
-        if(isset($_COOKIE["username"]))
-        {
-            header("location: profile_view.php");
-        }
-        if(isset($_POST['register']))
-        {
-            $mysqli=new Database();
-            $firstname=$mysqli->escape_string($_POST['firstname']);
-            $lastname=$mysqli->escape_string($_POST['lastname']);
-            $email_address=$mysqli->escape_string($_POST['email_address']);
-            $password=$mysqli->escape_string($_POST['password']);
-            $registration_date=date('d-m-y H:i:s'); 
-            
-            session_start();
-            $code=$_SESSION['captcha'];
-            $user=$_POST['captcha'];
-            if($code==$user) 
-            {
-                echo "valid";                   
-            }
-            else
-            {
-                echo "invalid";
-                
-            } 
-            $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password,$registration_date);
-            $RegisterController->addUser($firstname,$lastname,$email_address,$password,$registration_date);
-            $error=$RegisterController->addUser($firstname,$lastname,$email_address,$password,$registration_date);    
-            "<p class='error'>$error</p>"; 
-        }*/
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,6 +20,7 @@
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>
             <a href="#Tvs">Tvs</a>
+            <a href="/views/searchuser_view.php">Search User</a>
             <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
         </div>
     </header>

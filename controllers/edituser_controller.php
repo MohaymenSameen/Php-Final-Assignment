@@ -2,15 +2,18 @@
     require_once ('../models/edituser_model.php');
     class EditUserController extends EditUserModel
     {
+        //function to recieve user from model
         public function recieveUser($firstname,$lastname,$email_address,$password)
         {
             $EditUserModel= new EditUserModel($firstname,$lastname,$email_address,$password);
             $EditUserModel->getUser();            
         }
+        //function to send to model to update database for a certain user
         public function changeUser($firstname,$lastname,$email_address,$password,$confpassword)
         {
             $EditUserModel= new EditUserModel($firstname,$lastname,$email_address,$password);
             
+            //if firstname or lastname or email empty, then send error message, else if unvalid email send error, else if password not same send error, else if password fields are empty update else the database will update all fields including passwords
             if(empty($firstname)||empty($lastname)||empty($email_address))
             {               
                 echo "<p class='error'>please fill in all fields</p>";

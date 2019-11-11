@@ -22,8 +22,9 @@
             <a href="/views/home_view.php">Home</a>
             <a href="#Laptops">Laptops</a>
             <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
+            <a href="#Cameras">Cameras</a>            
             <a href="#Tvs">Tvs</a>
+            <a href="/views/searchuser_view.php">Search User</a>
             <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
         </div>
     </header>    
