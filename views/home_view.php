@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if(isset($_COOKIE["username"]))
     {
         header("location: profile_view.php");

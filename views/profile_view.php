@@ -15,7 +15,7 @@
         <h1>TechnoGuides</h1>
         <h2>Your only reliable source for tech news</h2>           
         <?php
-        session_start();
+            session_start();
 
             if(isset($_SESSION['username']))
             {

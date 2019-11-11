@@ -33,7 +33,7 @@
             $this->password=$password;
         }
         //getting user
-        public function getUser(string $email_address, string $password)
+        public function getUser($email_address, $password)
         {
             $sql = "SELECT register_ID, password FROM register WHERE email_address='$email_address'";
             $result = $this->connect()->query($sql);

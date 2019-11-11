@@ -2,28 +2,24 @@
     require_once ('../models/resetpass_model.php');
     class ResetPassController extends ResetPassModel
     {        
-        public function changePass(string $email_address,string $password,string $confpassword)
+        public function changePass($password,$confpassword)
         {
-            $ResetPassModel=new ResetPassModel($email_address,$password);
-
-            if($ResetPassModel->checkEmail($email_address,$password))
-            {
-                if(empty($password) && empty($confpassword))
-                {
-                    exit ("Please enter you new password");
-                }
-                else if($password!=$confpassword)
-                {
-                    exit ("Passwords do not match!");
-                }
-                else
-                {
-                    $ResetPassModel->updatePass($password);
-                }
+            $ResetPassModel=new ResetPassModel($password);            
+            if(empty($password) && empty($confpassword))
+            {                   
+                echo "<p class='error'>Please enter you new password</p>";
             }
+            else if($password!=$confpassword)
+            {                    
+                echo "<p class='error'>Passwords do not match!</p>";                
+            }                
             else
             {
-                exit ("email does not exist in database");
+                $ResetPassModel->updatePass($password);
+                exit ("<p class='error'>Password has been changed</p>");
+                session_start();
+                session_destroy();
+                header("location: login_view.php");
             }
         }
     }

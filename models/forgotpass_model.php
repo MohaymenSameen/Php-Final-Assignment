@@ -17,7 +17,7 @@
         {
             $this->email_address=$email_address;
         }
-        public function getEmail(string $email_address)
+        public function getEmail($email_address)
         {
             $sql="SELECT register_ID FROM register WHERE email_address='$email_address'";
             $result=$this->connect()->query($sql); 
@@ -29,13 +29,5 @@
                 return $data;
             }
         }
-
-
-
-
-
-
-
-
     }
 ?>

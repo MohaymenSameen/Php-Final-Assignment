@@ -1,18 +1,5 @@
 <?php
-    require_once ('../Db_Connection/db.connection.php');
-    //require_once ('../models/resetpass_model.php');
-    require_once ('../controllers/resetpass_controller.php');
-
-    if(isset($_POST['email_address']))
-    {
-        $mysqli=new Database();
-        $email_address=$mysqli->escape_string($_POST['email_address']);
-        $password=$mysqli->escape_string($_POST['password']);
-        $confpassword=$mysqli->escape_string($_POST['confirm_password']);
-
-        $ResetPassController=new ResetPassController($email_address,$password);
-        $ResetPassController->changePass($email_address,$password,$confpassword);
-    }
+       
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,8 +30,27 @@
     
     <div class="background_color">
         <form class="reset_password_form" method="POST" ation="#">
-            <h1>Change Password</h1><br><br>            
-            <input type="text" name="email_address" placeholder="Email"><br><br>            
+            <h1>Change Password</h1><br><br>      
+            <?php
+                require_once ('../Db_Connection/db.connection.php');                
+                require_once ('../controllers/resetpass_controller.php');
+            
+                    session_start();
+                    if(!isset($_SESSION['username']))
+                    {
+                        header("location: login_view.php");
+                    }
+                    if(isset($_POST['change']))
+                    {
+                        $mysqli=new Database();
+                        $password=$mysqli->escape_string($_POST['password']);
+                        $confpassword=$mysqli->escape_string($_POST['confirm_password']);
+            
+                        $ResetPassController=new ResetPassController($password);
+                        $ResetPassController->changePass($password,$confpassword);            
+                    }                
+            ?> 
+            <br><br>   
             <input type="password" name="password" placeholder="Password"><br><br>
             <input type="password" name="confirm_password" placeholder="Confirm Password"><br><br>            
             <input type="submit" name="change" value="Change Password"><br><br><br>   

@@ -155,7 +155,7 @@ footer a
 body div.background_color
 {    
     background-image: linear-gradient(0deg,#043871, #00a9a5);
-    height: 700px;
+    height: 1200px;    
     text-align: center;    
 }
 body div.background_color form.login_form
@@ -430,6 +430,92 @@ h4
     color: #113d44;
     font-weight: bold; 
    
+}
+
+body div.background_color form.login_form p.error
+{
+    background-color: #f44336;
+    font-family: "Century Gothic"; 
+    padding: 5px;
+    width: 80%;   
+    height: 40px; 
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    left:9%;
+    border-radius: 5px; 
+    padding-top: 5%;    
+}
+body div.background_color form.registration_form p.error
+{
+    background-color: #f44336;
+    font-family: "Century Gothic"; 
+    padding: 5px;
+    width: 80%;   
+    height: 40px; 
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    left:9%;
+    border-radius: 5px; 
+    padding-top: 5%;
+}
+body div.background_color form.forgot_password_form p.error
+{
+    background-color: #f44336;
+    font-family: "Century Gothic"; 
+    padding: 5px;
+    width: 80%;   
+    height: 40px; 
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    left:9%;
+    border-radius: 5px; 
+    padding-top: 5%;
+}
+body div.background_color form.edit_details_form p.error
+{
+    background-color: #f44336;
+    font-family: "Century Gothic"; 
+    padding: 5px;
+    width: 80%;   
+    height: 40px; 
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    left:9%;
+    border-radius: 5px; 
+    padding-top: 5%;
+}
+body div.background_color form.reset_password_form p.error
+{
+    background-color: #f44336;
+    font-family: "Century Gothic"; 
+    padding: 5px;
+    width: 80%;   
+    height: 40px; 
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    left:9%;
+    border-radius: 5px; 
+    padding-top: 5%;
 }
 
 

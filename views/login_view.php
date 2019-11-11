@@ -1,22 +1,3 @@
-<?php
-    require_once ('../Db_Connection/db.connection.php');
-    require_once ('../controllers/login_controller.php');
-    //require_once ('../models/login_model.php');   
-
-    if(isset($_COOKIE["username"]))
-    {
-        header("location: profile_view.php");
-    }
-    if(isset($_POST['Login']))
-    {      
-        $mysqli=new Database();        
-        $email_address=$mysqli->escape_string($_POST['email_address']);
-        $password=$mysqli->escape_string($_POST['password']);  
-        $LoginController = new LoginController($email_address,$password);      
-        $LoginController->Login($email_address,$password);        
-        setcookie("username",$email_address,time()+3600);        
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,8 +26,27 @@
     </header>    
     
     <div class="background_color">
-        <form class="login_form" method="POST" ation="#">
-            <h1>Login</h1><br><br>            
+        <form class="login_form" method="POST" action="#">
+            <h1>Login</h1><br><br>                 
+                <?php
+                    require_once ('../Db_Connection/db.connection.php');
+                    require_once ('../controllers/login_controller.php');
+                    require_once ('../models/login_model.php');     
+                    if(isset($_COOKIE["username"]))
+                    {
+                        header("location: profile_view.php");
+                    }   
+                    if(isset($_POST['Login']))
+                    {      
+                        $mysqli=new Database();        
+                        $email_address=$mysqli->escape_string($_POST['email_address']);
+                        $password=$mysqli->escape_string($_POST['password']);  
+                        $LoginController = new LoginController($email_address,$password);  
+                        $error=$LoginController->Login($email_address,$password);    
+                        "<p class='error'>$error</p>";          
+                    }
+                ?>    
+            <br><br>
             <input type="text" name="email_address" placeholder="Email"><br><br><br>            
             <input type="password" name="password" placeholder="Password"><br><br><br>
             <input type="submit" name="Login" value="Login"><br><br><br><br>

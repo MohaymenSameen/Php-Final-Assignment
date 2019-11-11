@@ -30,8 +30,7 @@
         <h1>Edit Details</h1><br><br>  
             <?php
                 require_once ('../Db_Connection/db.connection.php');                
-                require_once ('../controllers/edituser_controller.php');
-                //require_once ('../models/edituser_model.php'); 
+                require_once ('../controllers/edituser_controller.php');             
 
                 $firstname=null;
                 $lastname=null;
@@ -61,8 +60,8 @@
                     $mysqli=new Database();
                     $firstname=$mysqli->escape_string($_POST['firstname']);
                     $lastname=$mysqli->escape_string($_POST['lastname']);
-                    $email_address=$mysqli->escape_string($_POST['email_address']);
-                    $password=$mysqli->escape_string($_POST['password']); 
+                    $email_address=$mysqli->escape_string($_POST['email_address']);                    
+                    $password=$mysqli->escape_string($_POST['password']);                     
                     $confpassword=$mysqli->escape_string($_POST['confpassword']);  
                     $EditUserController=new EditUserController($firstname,$lastname,$email_address,$password);                   
                     $EditUserController->changeUser($firstname,$lastname,$email_address,$password,$confpassword);                 
@@ -70,16 +69,16 @@
                 }
                 if(isset($_POST['delete']))
                 {
-                        $EditUserController=new EditUserController($firstname,$lastname,$email_address,$password);                   
-
-                        $EditUserController->removeUser($firstname,$lastname,$email_address,$password);
+                    $EditUserController=new EditUserController($firstname,$lastname,$email_address,$password); 
+                    $EditUserController->removeUser($firstname,$lastname,$email_address,$password);
                 }
                 if(!isset($_SESSION['username']))
                 {
                     header("Location: home_view.php");                                
                 }
                 
-            ?>                  
+            ?>  
+            <br><br>                
             <input type="submit" name="change" value="Save Changes"><br><br> 
             <input type="submit" name="delete" value="Delete Account"><br><br> 
 

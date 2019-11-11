@@ -57,7 +57,7 @@
             $this->registration_date=$registration_date;
         }
 
-        public function inputUser(string $firstname,string $lastname,string $email_address,string $password,string $registration_date)
+        public function inputUser($firstname,$lastname,$email_address,$password,$registration_date)
         {
             $hash=password_hash($password, PASSWORD_BCRYPT);
             $sql = "INSERT INTO register (firstname,lastname,email_address,password,registration_date)
@@ -68,9 +68,9 @@
                 return $result;
             }           
         }
-        public function validateEmail(string $email_address)
+        public function validateEmail($email_address)
         {
-            $validate="SELECT `email_address` FROM `register` WHERE `email_address`='".$email_address."'"; //or exit($this->connect()->error);
+            $validate="SELECT `email_address` FROM `register` WHERE `email_address`='".$email_address."'";
             $result=$this->connect()->query($validate);
             $numRows=$result->num_rows;            
             if($numRows>0)
@@ -79,14 +79,6 @@
                 $data=$row;
                 return $data;
             }                                   
-        }
-        
-
-        
-
+        }    
     }
-
-
-
-
 ?>

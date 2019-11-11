@@ -1,15 +1,19 @@
 <?php
-    require_once ('../Db_Connection/db.connection.php');
+   /* require_once ('../Db_Connection/db.connection.php');
     require_once ('../controllers/forgotpass_controller.php');
     //require_once ('../models/forgotpass_model.php'); 
 
+    if(isset($_COOKIE["username"]))
+    {
+        header("location: profile_view.php");
+    }
     if(isset($_POST['change']))
     {
         $mysqli=new Database();        
         $email_address=$mysqli->escape_string($_POST['email_address']);
         $ForgotPassController= new ForgotPassController($email_address);
         $ForgotPassController->sendEmail($email_address);        
-    }
+    }*/
 
 ?>
 <!DOCTYPE html>
@@ -41,7 +45,25 @@
     
     <div class="background_color">
         <form class="forgot_password_form" method="POST" ation="#">
-            <h1>Forgot Password</h1><br><br>            
+            <h1>Forgot Password</h1><br><br>  
+            
+            <?php
+                require_once ('../Db_Connection/db.connection.php');
+                require_once ('../controllers/forgotpass_controller.php');               
+            
+                if(isset($_COOKIE["username"]))
+                {
+                    header("location: profile_view.php");
+                }
+                if(isset($_POST['change']))
+                {
+                    $mysqli=new Database();        
+                    $email_address=$mysqli->escape_string($_POST['email_address']);
+                    $ForgotPassController= new ForgotPassController($email_address);
+                    $ForgotPassController->sendEmail($email_address);        
+                }                  
+            ?> 
+            <br><br>               
             <input type="text" name="email_address" placeholder="Email"><br><br>            
             <input type="submit" name="change" value="Forgot Password"><br><br><br>   
         </form>

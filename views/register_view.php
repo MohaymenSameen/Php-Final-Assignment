@@ -1,8 +1,13 @@
 <?php
-    require_once ('../Db_Connection/db.connection.php');
+    /*require_once ('../Db_Connection/db.connection.php');
     require_once ('../controllers/register_controller.php');
     //require_once ('../models/register_model.php');    
     
+        //session_start();
+        if(isset($_COOKIE["username"]))
+        {
+            header("location: profile_view.php");
+        }
         if(isset($_POST['register']))
         {
             $mysqli=new Database();
@@ -26,7 +31,9 @@
             } 
             $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password,$registration_date);
             $RegisterController->addUser($firstname,$lastname,$email_address,$password,$registration_date);
-        }
+            $error=$RegisterController->addUser($firstname,$lastname,$email_address,$password,$registration_date);    
+            "<p class='error'>$error</p>"; 
+        }*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,12 +62,66 @@
     </header>
     <div class="background_color">
         <form class="registration_form" method="POST" action="#">
-            <h1>Register</h1><br><br>            
+            <h1>Register</h1><br><br>   
+            <?php
+            require_once ('../Db_Connection/db.connection.php');
+            require_once ('../controllers/register_controller.php');          
+            
+      
+                if(isset($_COOKIE["username"]))
+                {
+                    header("location: profile_view.php");
+                }
+                if(isset($_POST['register']))
+                {
+                    $mysqli=new Database();
+                    $firstname=$mysqli->escape_string($_POST['firstname']);
+                    $lastname=$mysqli->escape_string($_POST['lastname']);
+                    $email_address=$mysqli->escape_string($_POST['email_address']);
+                    $password=$mysqli->escape_string($_POST['password']);
+                    $registration_date=date('d-m-y H:i:s');
+
+                    $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password,$registration_date);
+                    session_start();
+                    $code=$_SESSION['captcha'];
+                    $user=$_POST['captcha'];
+
+
+                    if(empty($firstname) || empty($lastname) || empty($email_address) || empty($password) || empty($user))
+                    {                                 
+                        echo "<p class='error'>Please fill in all the fields</p>";   
+                    }                    
+                    
+                    $validemail=filter_var($email_address,FILTER_VALIDATE_EMAIL);
+                    $RepeatEmail=$RegisterController->checkEmail($firstname,$lastname,$email_address,$password,$registration_date);
+                    
+                    if(!$validemail)
+                    {          
+                        echo "<p class='error'>This is not a valid Email</p>";
+                    }
+                    if($RepeatEmail)
+                    {
+                        echo "<p class='error'>This email is already being used.</p>";
+                    }
+                    if($code==$user && $validemail && !$RepeatEmail) 
+                    {                        
+                        echo "<p class='error'>Valid Captcha</p>";   
+                        $RegisterController->addUser($firstname,$lastname,$email_address,$password,$registration_date);                                           
+                        header("location: login_view.php");
+                    }
+                    else
+                    {
+                        echo "<p class='error'>Invalid Captcha</p>";  
+                    }           
+                }
+   
+            ?>  
+            <br><br>        
             <input type="text" name="firstname" placeholder="First Name"><br><br>
             <input type="text" name="lastname" placeholder="Last Name"><br><br>
             <input type="text" name="email_address" placeholder="Email Address"><br><br>            
             <input type="text" name="password"  placeholder="Password"><br><br>
-            <input type="text" name="captcha" placeholder="Enter Captcha" ><img src="/views/captcha.php"><br><br>
+            <input type="text" name="captcha" placeholder="Enter Captcha" ><br><img src="/views/captcha.php"><br><br>
             <input type="submit" name="register" value="Register"><br><br><br><br>
 
         </form>
