@@ -31,11 +31,12 @@
             require_once ('../Db_Connection/db.connection.php');
             require_once ('../controllers/register_controller.php');          
             
-      
+                //if cookie made redirect to profile view
                 if(isset($_COOKIE["username"]))
                 {
                     header("location: profile_view.php");
                 }
+                //if register button clicked
                 if(isset($_POST['register']))
                 {
                     $mysqli=new Database();
@@ -47,26 +48,30 @@
 
                     $RegisterController = new RegisterController($firstname,$lastname,$email_address,$password,$registration_date);
                     session_start();
+                    //session started to make captcha
                     $code=$_SESSION['captcha'];
                     $user=$_POST['captcha'];
 
-
+                    //if all fields empty display error
                     if(empty($firstname) || empty($lastname) || empty($email_address) || empty($password) || empty($user))
                     {                                 
                         echo "<p class='error'>Please fill in all the fields</p>";   
                     }                    
-                    
+                    //storing if email is valid in a variable and if email exists in db it also is stored in a variable (repeatemail)
                     $validemail=filter_var($email_address,FILTER_VALIDATE_EMAIL);
                     $RepeatEmail=$RegisterController->checkEmail($firstname,$lastname,$email_address,$password,$registration_date);
                     
+                    //if email is not valid display error
                     if(!$validemail)
                     {          
                         echo "<p class='error'>This is not a valid Email</p>";
                     }
+                    //if email exists throw error
                     if($RepeatEmail)
                     {
                         echo "<p class='error'>This email is already being used.</p>";
                     }
+                    //if captcha and is valid email and not repeated email, add user
                     if($code==$user && $validemail && !$RepeatEmail) 
                     {                        
                         echo "<p class='error'>Valid Captcha</p>";   

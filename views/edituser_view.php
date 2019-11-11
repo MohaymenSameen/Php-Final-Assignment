@@ -32,7 +32,7 @@
             <?php
                 require_once ('../Db_Connection/db.connection.php');                
                 require_once ('../controllers/edituser_controller.php');             
-
+                //intializing variables
                 $firstname=null;
                 $lastname=null;
                 $email_address=null;
@@ -40,6 +40,7 @@
                 $EditUserModel=new EditUserModel($firstname,$lastname,$email_address,$password);     
                 $row=$EditUserModel->getUser();
                 
+                //to output user info to each textfield
                 if(is_array($row))
                 {
                     foreach ($row as $res)
@@ -48,7 +49,8 @@
                     $lastname=$res['lastname'];
                     $email_address=$res['email_address'];
                     }
-                }               
+                }  
+                //adding info to textfield from db             
                 echo '<input type="text" name="firstname" placeholder="First Name" value='.$firstname.'><br><br>';
                 echo '<input type="text" name="lastname" placeholder="Last Name" value='.$lastname.'><br><br>';
                 echo '<input type="text" name="email_address" placeholder="Email Address" value='.$email_address.'><br><br>';
@@ -56,9 +58,11 @@
                 echo '<input type="password" name="password" placeholder="Password"><br><br>';
                 echo '<input type="password" name="confpassword" placeholder="Confirm Password"><br><br>';           
                
+                //if button clicked update user
                 if(isset($_POST['change']))
                 {  
                     $mysqli=new Database();
+                    //prevention of sql injection using escape string
                     $firstname=$mysqli->escape_string($_POST['firstname']);
                     $lastname=$mysqli->escape_string($_POST['lastname']);
                     $email_address=$mysqli->escape_string($_POST['email_address']);                    
@@ -68,11 +72,13 @@
                     $EditUserController->changeUser($firstname,$lastname,$email_address,$password,$confpassword);                 
                     
                 }
+                //if button clicked delete user
                 if(isset($_POST['delete']))
                 {
                     $EditUserController=new EditUserController($firstname,$lastname,$email_address,$password); 
                     $EditUserController->removeUser($firstname,$lastname,$email_address,$password);
                 }
+                //if no session, person will keep being redirected to home
                 if(!isset($_SESSION['username']))
                 {
                     header("Location: home_view.php");                                

@@ -52,10 +52,12 @@
                 require_once ('../Db_Connection/db.connection.php');
                 require_once ('../controllers/forgotpass_controller.php');               
             
+                //if cookie is set keep redirecting to profile
                 if(isset($_COOKIE["username"]))
                 {
                     header("location: profile_view.php");
                 }
+                //if button clicked check email from db and send to user account
                 if(isset($_POST['change']))
                 {
                     $mysqli=new Database();        

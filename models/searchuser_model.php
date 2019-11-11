@@ -49,6 +49,28 @@
                 }   
                 return $result;
             }  
-        }    
+        } 
+        //checking if email exists 
+        public function validateEmail($firstname,$email_address)
+        {
+            $validate="SELECT `email_address` FROM `register` WHERE `email_address`='".$email_address."'";
+            $result=$this->connect()->query($validate);
+            $numRows=$result->num_rows;            
+            if($numRows>0)
+            {           
+                return true;
+            }                                   
+        }
+        //checking if name exists
+        public function validateName($firstname,$email_address)
+        {
+            $validate="SELECT `firstname` FROM `register` WHERE `firstname`='".$firstname."'";
+            $result=$this->connect()->query($validate);
+            $numRows=$result->num_rows;            
+            if($numRows>0)
+            {     
+                return true;
+            }                                   
+        } 
     }
 ?>

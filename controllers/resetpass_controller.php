@@ -1,7 +1,8 @@
 <?php
     require_once ('../models/resetpass_model.php');
     class ResetPassController extends ResetPassModel
-    {        
+    {    
+        //function to change pass    
         public function changePass($password,$confpassword)
         {
             $ResetPassModel=new ResetPassModel($password);            
@@ -17,6 +18,7 @@
             {
                 $ResetPassModel->updatePass($password);
                 exit ("<p class='error'>Password has been changed</p>");
+                //destroying session so user cannot come back to this page.
                 session_start();
                 session_destroy();
                 header("location: login_view.php");

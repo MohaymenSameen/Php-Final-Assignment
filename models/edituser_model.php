@@ -47,6 +47,7 @@
         {
             $this->password=$password;
         }
+        //getting user info from db
         public function getUser()
         {
             session_start();
@@ -59,17 +60,20 @@
                 return $rows;                
             }
         }
+        //function to update user
         public function updateUser($firstname,$lastname,$email_address,$password)
         {            
            $sql="UPDATE `register` SET firstname='$firstname',lastname='$lastname',email_address='$email_address' WHERE email_address='{$_SESSION['username']}'";
             $result = $this->connect()->query($sql);            
         }
+        //function to update user and user password
         public function updatePass($firstname,$lastname,$email_address,$password)
         {            
             $hash = password_hash($password, PASSWORD_BCRYPT);
             $sql="UPDATE `register` SET firstname='$firstname',lastname='$lastname',email_address='$email_address',password='$hash' WHERE email_address='{$_SESSION['username']}'";
             $result = $this->connect()->query($sql);            
         }
+        //function to delete user
         public function deleteUser($email_address)
         {
             $sql="DELETE FROM `register` WHERE email_address='{$_SESSION['username']}'";

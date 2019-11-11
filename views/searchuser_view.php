@@ -32,6 +32,8 @@
             require_once ('../controllers/searchuser_controller.php');      
             
       
+                //I made a very extensive query search for email and name, you can either enter only an email or a name and still get results. If you fill in both email and name you stil get the result.
+
                 //is button clicked
                 if(isset($_POST['search']))
                 {
@@ -44,42 +46,96 @@
                     session_start();
                     $code=$_SESSION['captcha'];
                     $user=$_POST['captcha'];
+                    $checkemail=$SearchUserController->checkEmail($firstname,$email_address);
+                    $checkname=$SearchUserController->checkName($firstname,$email_address);
 
                     //if email field and captcha empty or if firstname and captcha empty
                     if((empty($email_address) && empty($user)) || (empty($firstname)&&empty($user)))
                     {
                         echo "<p class='error'>Please fill in a field and Captcha.</p>";    
                     }
-                    else
+                    //if email field is not empty and firstname field is empty
+                    else if(!empty($email_address)&&empty($firstname))
                     {
-                        //getting user
-                        $result=$SearchUserController->findUser($firstname,$email_address);
                         $validemail=filter_var($email_address,FILTER_VALIDATE_EMAIL);
-                        //if email is not valid and is empty  
-                        if(!$validemail && !empty($email_address))
+                        //checking if email not valid and firstname field is empty
+                        if(!$validemail && empty($firstname))
+                        {                            
+                            echo "<p class='error'>Please enter a Valid Email</p>";
+                        }                                                   
+                        //checking if email exists and firstname field is empty  
+                        else if(!$checkemail&& empty($firstname))
                         {
-                        echo "<p class='error'>Please enter a Valid Email</p>";   
+                            echo "<p class='error'>Email Does Not Exist</p>";  
                         }
+                        //user found
                         else
                         {
-                            //if no result else if result and captcha correct communicate with db
-                            if(!$result)
+                            if($code==$user) 
                             {
-                                echo "<p class='error'>No user found</p>";   
-                            }                                    
-                        
-                        
-                            if(($code==$user && $result)) 
-                            {
+                                $result=$SearchUserController->findUser($firstname,$email_address);
                                 echo "<p class='error'>User Found!</p>";                               
                             }                         
                             else
                             {
                                 echo "<p class='error'>Invalid Captcha</p>";  
-                            }   
+                            } 
                         }
-                      
-                    }                                              
+                           
+                    }
+                    //if email field is empty and firstname is not empty      
+                    else if(!empty($firstname)&&empty($email_address)) 
+                    {
+                        //check if username does not exist
+                        if(!$checkname)
+                        {
+                            echo "<p class='error'>Name does not exist</p>"; 
+                        }
+                        //user found
+                        else
+                        {
+                            if($code==$user) 
+                            {
+                                $result=$SearchUserController->findUser($firstname,$email_address);                            
+                                echo "<p class='error'>User Found!</p>";                               
+                            }                         
+                            else
+                            {
+                                echo "<p class='error'>Invalid Captcha</p>";  
+                            } 
+                        }                                               
+                    }
+                    //if both email and firstname fields are filled
+                    else
+                    {
+                        $validemail=filter_var($email_address,FILTER_VALIDATE_EMAIL);
+                        //if email not valid
+                        if(!$validemail)
+                        {
+                            echo "<p class='error'>Please enter a Valid Email</p>";
+                        }
+                        //proceed
+                        else
+                        {   //if email and name exist user found
+                            if($checkemail && $checkname)
+                            {
+                                if($code==$user) 
+                                {
+                                    $result=$SearchUserController->findUser($firstname,$email_address);                            
+                                    echo "<p class='error'>User Found!</p>";                               
+                                }                         
+                                else
+                                {
+                                    echo "<p class='error'>Invalid Captcha</p>";  
+                                } 
+                            }
+                            //not found
+                            else
+                            {
+                                echo "<p class='error'>User Not Found!</p>";                              
+                            }
+                        }                       
+                    }                                       
                 }   
             ?>  
             <br><br>            

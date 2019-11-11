@@ -12,5 +12,23 @@
                 return $data;
             }
         }
+        //checking if email exists
+        public function checkEmail($firstname,$email_address)
+        {
+            $SearchUserModel = new SearchUserModel($firstname,$email_address);
+            if($SearchUserModel->validateEmail($firstname,$email_address))
+            {
+                return true;
+            }            
+        }
+        //checking if name exists
+        public function checkName($firstname,$email_address)
+        {
+            $SearchUserModel = new SearchUserModel($firstname,$email_address);
+            if($SearchUserModel->validateName($firstname,$email_address))
+            {
+                return true;
+            }            
+        }
     }
 ?>

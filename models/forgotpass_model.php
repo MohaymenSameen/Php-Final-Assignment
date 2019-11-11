@@ -17,6 +17,7 @@
         {
             $this->email_address=$email_address;
         }
+        //function to get email from db
         public function getEmail($email_address)
         {
             $sql="SELECT register_ID FROM register WHERE email_address='$email_address'";

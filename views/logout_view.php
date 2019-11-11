@@ -1,4 +1,5 @@
 <?php
+    //if person clicks logout remove cookies and sessions
     if(isset($_GET['logout']))
     {
         /*https://security.stackexchange.com/questions/18880/do-you-need-to-encrypt-session-data
@@ -7,7 +8,8 @@
         anything about them in the slides.*/
 
         session_start();       
-        session_destroy();        
+        session_destroy(); 
+        //removing and deleting cache and not to store it       
         header("Cache-Control: no-store, no-cache");
         setcookie("username","",time()-3600);
         header("Location: login_view.php");

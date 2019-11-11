@@ -14,13 +14,14 @@
         <img src="/img/logo.png">
         <h1>TechnoGuides</h1>
         <h2>Your only reliable source for tech news</h2>           
-        <?php
+        <?php            
             session_start();
-
+            //if session started display session username 
             if(isset($_SESSION['username']))
             {
                 echo "<h3>".$_SESSION['username']."</h3>";                                
             }
+            //redirect to home page
             else
             {
                 header("Location: home_view.php");

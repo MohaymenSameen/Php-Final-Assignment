@@ -1,4 +1,5 @@
 <?php
+    //if cookie is active keep redirecting to profile view
     session_start();
     if(isset($_COOKIE["username"]))
     {

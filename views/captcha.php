@@ -1,4 +1,5 @@
 <?php
+//making a captcha
 $str = md5(microtime());
 $str = substr($str,0,6);
 session_start();

@@ -2,22 +2,12 @@
     require_once ('../Db_Connection/db.connection.php');
     class ResetPassModel extends Database
     {
-        //public $email_address;
         public $password;
-
-        public function __construct(/*$email_address,*/$password)
+        
+        public function __construct($password)
         {
-            //$this->email_address=$email_address;
             $this->password=$password;
-        }
-        /*public function getEmailAddress()
-        {
-            return $this->email_address;
-        }
-        public function setEmailAddress()
-        {
-            $this->email_address=$email_address;
-        }*/
+        }        
         public function getPassword()
         {
             return $this->password;
@@ -25,7 +15,8 @@
         public function setPassword()
         {
             $this->password=$password;
-        }        
+        }
+        //function to update pass in db after changing         
         public function updatePass($password)
         {
             session_start();

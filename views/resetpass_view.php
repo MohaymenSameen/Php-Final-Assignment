@@ -35,12 +35,13 @@
             <?php
                 require_once ('../Db_Connection/db.connection.php');                
                 require_once ('../controllers/resetpass_controller.php');
-            
+                    //if no session has started keep redirecting to login page
                     session_start();
                     if(!isset($_SESSION['username']))
                     {
                         header("location: login_view.php");
                     }
+                    //if button clicked change password
                     if(isset($_POST['change']))
                     {
                         $mysqli=new Database();
@@ -48,7 +49,7 @@
                         $confpassword=$mysqli->escape_string($_POST['confirm_password']);
             
                         $ResetPassController=new ResetPassController($password);
-                        $ResetPassController->changePass($password,$confpassword);            
+                        $ResetPassController->changePass($password,$confpassword);    
                     }                
             ?> 
             <br><br>   

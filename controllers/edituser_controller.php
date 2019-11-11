@@ -31,7 +31,7 @@
             
                 $EditUserModel->updateUser($firstname,$lastname,$email_address,$password);                
                 echo "<p class='error'>Database has been updated</p>";
-
+                //sending mail to user to tell them that details have been changed 
                 mail($email_address,"Account Details Changed","You have recently changed some details of your account","From: 627650@student.inholland.nl\r\n");
                 setcookie("username","",time()-3600); 
                 setcookie("username",$email_address,time()+3600);
@@ -43,20 +43,22 @@
             }
             else
             {
-                $EditUserModel->updatePass($firstname,$lastname,$email_address,$password); 
+                $EditUserModel->updatePass($firstname,$lastname,$email_address,$password);
+                //sending mail to user to tell them that details have been changed and PASSWORD. 
                 mail($email_address,"Account Details Changed","You have recently changed some details of your account and your password","From: 627650@student.inholland.nl\r\n");                
                 echo "<p class='error'>Database has been updated and passwords have been changed</p>";
+                //destroying cookie for old user details and making new one for new user
                 setcookie("username","",time()-3600); 
                 setcookie("username",$email_address,time()+3600);
                 session_destroy();
-
+                //destroying session for old user and making a new session for new user.
                 session_start();            
                 $_SESSION["username"]=$email_address;
                 header("location: profile_view.php");
-            }
-            
+            }           
             
         }
+        //function to delete user
         public function removeUser($firstname,$lastname,$email_address,$password)
         {
             
