@@ -52,9 +52,9 @@
                         //"<p class='error'>$error</p>";                        
                     }
                 ?>    
-            <br><br>
-            <p id='error'></p>
-            <input type="text" id="email_address" oninput="checkInput();" name="email_address" placeholder="Email" ><br><br><br>            
+           
+            <p id="error" style="background-color: white; margin-bottom: 10px;"></p>
+            <input type="text" id="email_address" oninput="checkEmail();" name="email_address" placeholder="Email" ><br><br><br>            
             <input type="password" id="password" name="password" placeholder="Password"><br><br><br>
             <input type="submit" name="Login" value="Login"><br><br><br><br>
             <a href="/views/forgotpass_view.php">Forgot Password?<br><br><br></a>

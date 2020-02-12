@@ -1,13 +1,18 @@
-var email_address = document.getElementById('error');
-var password = document.getElementById('password');
+var error = document.getElementById('error');
+var Uemail = document.getElementById('email_address');
+var Upass = document.getElementById('password');
+var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-var Uemail = document.login.email_address;
-var Upass = document.login.password;
-
-function checkInput()
+function checkEmail()
 {
-    if(Uemail.value.length <5)
-    {        
-        email_address.innerHTML = "Unvalid email";
-    }    
+    if(!re.test(Uemail.value))
+    {  
+        error.style.backgroundColor="#f44336";      
+        error.innerHTML = "Unvalid email";        
+    }
+    else
+    {
+        error.style.backgroundColor="Green";    
+        error.innerHTML = "Valid Email";
+    }
 }

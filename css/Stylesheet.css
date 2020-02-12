@@ -430,8 +430,7 @@ h4
     color: #113d44;
     font-weight: bold;   
 }
-
-body div.background_color form.login_form p#error
+p#error
 {
     background-color: #f44336;
     font-family: "Century Gothic"; 
