@@ -36,7 +36,7 @@
             }  
             //putting all errors in an array and displaying them
             $data=$this->errors($errors);            
-            echo "<p class=error>$data</p>";                        
+            echo "<p id=error>$data</p>";                        
         }
         //function for errors.
         public function errors($value)

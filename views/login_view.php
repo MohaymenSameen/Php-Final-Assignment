@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/Stylesheet.css">
+    <link rel="stylesheet" href="/css/Stylesheet.css">    
     <title>Login</title>
 </head>
 <body>
 
+   
+        
     <header>        
         <img src="/img/logo.png">
         <h1>TechnoGuides</h1>
@@ -27,7 +29,7 @@
     </header>    
     
     <div class="background_color">
-        <form class="login_form" method="POST" action="#">
+        <form class="login_form" method="POST" action="#" name="login">
             <h1>Login</h1><br><br>                 
                 <?php
                     require_once ('../Db_Connection/db.connection.php');
@@ -47,16 +49,20 @@
                         $LoginController = new LoginController($email_address,$password); 
                         //getting errors from controller and displaying them 
                         $error=$LoginController->Login($email_address,$password);    
-                        "<p class='error'>$error</p>";          
+                        //"<p class='error'>$error</p>";                        
                     }
                 ?>    
             <br><br>
-            <input type="text" name="email_address" placeholder="Email"><br><br><br>            
-            <input type="password" name="password" placeholder="Password"><br><br><br>
+            <p id='error'></p>
+            <input type="text" id="email_address" oninput="checkInput();" name="email_address" placeholder="Email" ><br><br><br>            
+            <input type="password" id="password" name="password" placeholder="Password"><br><br><br>
             <input type="submit" name="Login" value="Login"><br><br><br><br>
             <a href="/views/forgotpass_view.php">Forgot Password?<br><br><br></a>
             <a href="/views/register_view.php">Don't have an account?<br><strong>Sign Up</strong></a><br><br>
         </form>
     </div> 
+
+    <script src="../js/user.js">      
+    </script>
 </body>
 </html>
