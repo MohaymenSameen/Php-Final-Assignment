@@ -35,19 +35,10 @@
             if($numRows>0)
             {                                
                 while($res=$result->fetch_assoc())
-                {
-                    echo "<br>";
-                    echo 'First Name:  '.$res["firstname"];
-                    echo "<br>";
-                    echo 'Last Name:  '.$res["lastname"];
-                    echo "<br>";
-                    echo 'Email Address:  '.$res["email_address"];
-                    echo "<br>";
-                    echo 'Registration Date:  '.$res["registration_date"];
-                    echo "<br>";
-                    echo "<br>";
+                {                  
+                    $data[] = $res;
                 }   
-                return $result;
+                return $data;
             }  
         } 
         //checking if email exists 

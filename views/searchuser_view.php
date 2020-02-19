@@ -1,3 +1,29 @@
+<?php
+    require_once ('../Db_Connection/db.connection.php');
+    require_once ('../controllers/searchuser_controller.php');      
+
+    if(isset($_POST['download']))
+    {
+        //echo "<p class='error'>User Details Downloading</p>"; 
+        $mysqli=new Database();
+        $firstname=$mysqli->escape_string($_POST['firstname']);
+        $email_address=$mysqli->escape_string($_POST['email_address']);   
+        $SearchUserController = new SearchUserController($firstname,$email_address);
+        $result=$SearchUserController->findUser($firstname,$email_address);
+        if($result)
+        {
+            $csvDownload = $SearchUserController->csvDownload($firstname,$email_address,"$firstname.csv");                 
+        }
+        else
+        {
+            exit("no showm");
+        }                   
+    }
+    else
+    {
+        echo "<p class='error'>please enter atleast one field</p>";                              
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,8 +54,6 @@
             <h1>Search User</h1><br><br>  
             <table name="userdetails"> 
             <?php
-            require_once ('../Db_Connection/db.connection.php');
-            require_once ('../controllers/searchuser_controller.php');      
             
       
                 //I made a very extensive query search for email and name, you can either enter only an email or a name and still get results. If you fill in both email and name you stil get the result.
@@ -39,8 +63,7 @@
                 {
                     $mysqli=new Database();
                     $firstname=$mysqli->escape_string($_POST['firstname']);
-                    $email_address=$mysqli->escape_string($_POST['email_address']);
-                    
+                    $email_address=$mysqli->escape_string($_POST['email_address']);                    
                     $SearchUserController = new SearchUserController($firstname,$email_address);
                     //starting a session for captcha and keep changing if page is refreshed
                     session_start();
@@ -48,6 +71,14 @@
                     $user=$_POST['captcha'];
                     $checkemail=$SearchUserController->checkEmail($firstname,$email_address);
                     $checkname=$SearchUserController->checkName($firstname,$email_address);
+                    $result = $SearchUserController->findUser($firstname,$email_address);
+                    foreach($result as $res)
+                    {
+                        $firstname1 = $res['firstname'];
+                        $lastname = $res["lastname"];
+                        $email_address1 = $res["email_address"];
+                        $registration = $res["registration_date"];                                        
+                    }
 
                     //if email field and captcha empty or if firstname and captcha empty
                     if((empty($email_address) && empty($user)) || (empty($firstname)&&empty($user)))
@@ -74,6 +105,16 @@
                             if($code==$user) 
                             {
                                 $result=$SearchUserController->findUser($firstname,$email_address);
+                                echo "<br>";
+                                echo "First Name: ".$firstname1;
+                                echo "<br>";
+                                echo 'Last Name:  '.$lastname;
+                                echo "<br>";
+                                echo 'Email Address:  '.$email_address1;
+                                echo "<br>";
+                                echo 'Registration Date:  '.$registration;
+                                echo "<br>";
+                                echo "<br>";     
                                 echo "<p class='error'>User Found!</p>";                               
                             }                         
                             else
@@ -96,7 +137,17 @@
                         {
                             if($code==$user) 
                             {
-                                $result=$SearchUserController->findUser($firstname,$email_address);                            
+                                $result=$SearchUserController->findUser($firstname,$email_address);       
+                                echo "<br>";
+                                echo "First Name: ".$firstname1;
+                                echo "<br>";
+                                echo 'Last Name:  '.$lastname;
+                                echo "<br>";
+                                echo 'Email Address:  '.$email_address1;
+                                echo "<br>";
+                                echo 'Registration Date:  '.$registration;
+                                echo "<br>";
+                                echo "<br>";     
                                 echo "<p class='error'>User Found!</p>";                               
                             }                         
                             else
@@ -121,30 +172,41 @@
                             {
                                 if($code==$user) 
                                 {
-                                    $result=$SearchUserController->findUser($firstname,$email_address);                            
-                                    echo "<p class='error'>User Found!</p>";                               
+                                    $result=$SearchUserController->findUser($firstname,$email_address);  
+                                    echo "<br>";
+                                    echo "First Name: ".$firstname1;
+                                    echo "<br>";
+                                    echo 'Last Name:  '.$lastname;
+                                    echo "<br>";
+                                    echo 'Email Address:  '.$email_address1;
+                                    echo "<br>";
+                                    echo 'Registration Date:  '.$registration;
+                                    echo "<br>";
+                                    echo "<br>";     
+                                    echo "<p class='error'>User Found!</p>";     
                                 }                         
                                 else
                                 {
                                     echo "<p class='error'>Invalid Captcha</p>";  
                                 } 
+                                
                             }
                             //not found
                             else
                             {
                                 echo "<p class='error'>User Not Found!</p>";                              
-                            }
+                            }                            
                         }                       
-                    }                                       
-                }   
+                    }                                                         
+                }                                 
             ?>  
             <br><br>            
             </table>   
             <input type="text" name="firstname" placeholder="First Name"><br><br> 
             <input type="text" name="email_address" placeholder="Email Address"><br><br> 
             <input type="text" name="captcha" placeholder="Enter Captcha" ><br><img src="/views/captcha.php"><br><br>
-            <input type="submit" name="search" value="Search"><br><br><br><br>
-
+            <input type="submit" name="search" value="Search"><br><br>
+            <input type="submit" name="download" value="Download"><br><br>
         </form>
     </div>
 </body>
