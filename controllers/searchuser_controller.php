@@ -37,13 +37,11 @@
             foreach ($array as $line) 
             { 
                 fputcsv($f, $line, $delimiter); 
-            }       
-                
+            }                
             // tell the browser it's going to be a csv file
             header('Content-Type: text/csv; charset=utf-8');
             // tell the browser we want to save it instead of displaying it
             header('Content-Disposition: attachment; filename="'.$filename.'";');
-            // make php send the generated csv lines to the browser
             exit();
         }
     }

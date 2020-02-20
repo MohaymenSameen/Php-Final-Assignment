@@ -573,9 +573,39 @@ body div.background_color form.searchuser_form input[type=submit]
     background-image: linear-gradient(90deg, #025f5e,#043871);
     padding: 5px;
 }
-
-
-
-
-
-
+button#upload
+{    
+    cursor: pointer;
+    margin-top: 100px;
+    height: 70px;
+    width: 50%;
+    border-radius: 30px;
+    border-style: none;    
+    background-color: #043871 ;
+    transition: 0.3s;
+    font-size: 30px;
+    font-family: "Century Gothic";
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+button#upload:hover
+{
+    background-color: #00a9a5;
+}
+form#upload
+{
+    background-color: white;
+    width: 40%;      
+    position: absolute;
+    left: 32%;
+    top: 25%;
+    padding: auto;
+    border-radius: 10px;
+}
+form#upload h1
+{
+    position: static;
+    font-weight: bold;
+    font-size: 70px;    
+}
