@@ -5,6 +5,36 @@
     {
         header("location: profile_view.php");
     }
+
+   /* $appId = '';
+    $appSecret = '';
+
+    $feed = 23379598044;
+    $maximum = 10;
+    $caching = 60;
+
+    $filename = basename(__FILE__, '.php').'.json';
+    $filetime = file_exists($filename) ? filemtime($filename) : time() - $caching - 1;
+
+    if (time() - $caching > $filetime)
+    {
+        $authentication = file_get_contents("https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id={$appID}&client_secret={$appSecret}");
+
+        //$response = file_get_contents("https://graph.facebook.com/{$feed}/feed?{$authentication}&limit={$maximum}");
+        $authResponse = json_decode($authentication);
+        $response = file_get_contents("https://graph.facebook.com/{$feed}/feed?access_token={$authResponse->access_token}&limit={$maximum}");
+
+        file_put_contents($filename, $response);
+    } 
+    else
+    {
+        $response = file_get_contents($filename);
+    }
+
+    header('Content-Type: application/json');
+    header('Last-Modified: '.gmdate('D, d M Y H:i:s', $filetime).' GMT');
+
+    print($_GET['callback'] ? $_GET['callback'].'('.$response.')' : $response);*/
 ?>
 <html>
 <html lang="en">
