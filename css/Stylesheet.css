@@ -611,3 +611,19 @@ form#upload h1
     font-weight: bold;
     font-size: 70px;    
 }
+form#import
+{
+    background-color: white;
+    width: 40%;      
+    position: absolute;
+    left: 32%;
+    top: 25%;
+    padding: auto;
+    border-radius: 10px;
+}
+form#import h1
+{
+    position: static;
+    font-weight: bold;
+    font-size: 70px;    
+}
