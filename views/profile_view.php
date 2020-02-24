@@ -31,7 +31,7 @@
         <div class="navigation_bar">
             
             <a href="home_view.php">Home</a>
-            <a href="#Laptops">Laptops</a>
+            <a href="payment_view.php">Tickets</a>
             <a href="#Phones">Phones</a>
             <a href="#Cameras">Cameras</a>
             <a href="#Tvs">Tvs</a> 

@@ -17,6 +17,8 @@
                     {
                         //starts new session and cookie when logged in
                         $_SESSION['username']=$email_address;
+                        $_SESSION['firstname']=$GetUser['firstname'];
+                        $_SESSION['lastname']=$GetUser['lastname'];
                         setcookie("username",$email_address,time()+3600);
                         header("Location: profile_view.php");                                                                      
                     }

@@ -35,7 +35,7 @@
         //getting user
         public function getUser($email_address, $password)
         {
-            $sql = "SELECT register_ID, password FROM register WHERE email_address='$email_address'";
+            $sql = "SELECT * FROM register WHERE email_address='$email_address'";
             $result = $this->connect()->query($sql);
             $numRows=$result->num_rows;            
             if($numRows>0)

@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="/css/Stylesheet.css">    
     <title>Login</title>
 </head>
-<body>
-
-   
-        
+<body>   
     <header>        
         <img src="/img/logo.png">
         <h1>TechnoGuides</h1>
