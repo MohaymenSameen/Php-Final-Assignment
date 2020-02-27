@@ -6,35 +6,24 @@
         header("location: profile_view.php");
     }
 
-   /* $appId = '';
-    $appSecret = '';
+    $appId = '794365504408168';
+    $appSecret = '7edc7be1684732dfa45d47ace626e3d5';
 
     $feed = 23379598044;
     $maximum = 10;
     $caching = 60;
 
-    $filename = basename(__FILE__, '.php').'.json';
-    $filetime = file_exists($filename) ? filemtime($filename) : time() - $caching - 1;
-
-    if (time() - $caching > $filetime)
+    if(isset($_POST['submit']))
     {
-        $authentication = file_get_contents("https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id={$appID}&client_secret={$appSecret}");
+        $url=$_POST['profile_url'];
+        $facebook = "https://graph.facebook.com/$url/posts?access_token={$appId}|{$appSecret}";
+        header("Location: $facebook");
 
-        //$response = file_get_contents("https://graph.facebook.com/{$feed}/feed?{$authentication}&limit={$maximum}");
-        $authResponse = json_decode($authentication);
-        $response = file_get_contents("https://graph.facebook.com/{$feed}/feed?access_token={$authResponse->access_token}&limit={$maximum}");
-
-        file_put_contents($filename, $response);
+        /*$authentication = file_get_contents("https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id={$appId}&client_secret={$appSecret}");
+        $response = file_get_contents("https://graph.facebook.com/{$feed}/feed?access_token={$authentication->access_token}&limit={$maximum}");
+        $authResponse = json_decode($authentication);*/
+       
     } 
-    else
-    {
-        $response = file_get_contents($filename);
-    }
-
-    header('Content-Type: application/json');
-    header('Last-Modified: '.gmdate('D, d M Y H:i:s', $filetime).' GMT');
-
-    print($_GET['callback'] ? $_GET['callback'].'('.$response.')' : $response);*/
 ?>
 <html>
 <html lang="en">
@@ -58,7 +47,7 @@
             <a href="home_view.php">Home</a>
             <a href="#Laptops">Laptops</a>
             <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
+            <a href="import_view.php">Import Csv</a>
             <a href="upload_view.php">Upload Image</a>
             <a href="/views/searchuser_view.php">Search User</a>
             <a href="login_view.php"><strong>Join/Sign In</strong></a>
@@ -83,13 +72,15 @@
         <img src="/img/Laptop.png" alt="Laptop">
         <p>Dell’s most powerful laptop gets released in stores on the 28th of October. We recieved an early unit and have reviewed by our professional staff.</p>
     </div>
+    
+    <form action="#" method="POST" class="facebook"> 
+        <input type="text" name="profile_url" class="facebook" placeholder="Read Data from Facebook"/>
+        <input type="submit" name="submit" value="Read Data" class="facebook"/>
+    </form>
 
     <footer>
         <h3>Contact us</h3>
         <a href="#Contact">Contact Form</a>
-
     </footer>
-
-
 </body>
 </html>

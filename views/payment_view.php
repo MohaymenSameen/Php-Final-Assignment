@@ -1,31 +1,22 @@
 <?php
 
     session_start();
-    require('../fpdf182/fpdf.php');    
+    require('../fpdf182/fpdf.php');  
+
     if(!isset($_SESSION['username']))
     {
         header("Location: profile_view.php");
     }
     
-    if(isset($_POST['payment']))
+    if(isset($_POST['method']))
     {
-        /*header("Content-Type: application/octet-stream");
-
-        $file = $_GET["file"] .".pdf";
-        header("Content-Disposition: attachment; filename=" . urlencode($file));   
-        header("Content-Type: application/octet-stream");
-        header("Content-Type: application/download");
-        header("Content-Description: File Transfer");            
-        header("Content-Length: " . filesize($file));
-        flush(); // this doesn't really matter.
-        $fp = fopen($file, "r");
-        while (!feof($fp))
-        {
-            echo fread($fp, 65536);
-            flush(); // this is essential for large downloads
-        } 
-        fclose($fp);*/
-
+        
+    }
+    
+    
+    
+    /*if(isset($_POST['payment']))
+    {        
         $statImage = "../img/logo.png";
         $qrCode = "../img/qr-code.png";
         $pdf = new FPDF();
@@ -47,8 +38,7 @@
         $pdf->Image($qrCode,65,80,80);
 
         $pdf->Output();
-
-    }
+    }*/
 
 ?>
 <!DOCTYPE html>
@@ -83,6 +73,13 @@
             <input type="text" id="email_address" name="email_address" value="<?php echo ($_SESSION['username']);?>" ><br><br><br>         
             <input type="text" id="email_address" name="firstname" value="<?php echo ($_SESSION['firstname']);?>" ><br><br><br>          
             <input type="text" id="email_address" name="lastname" value="<?php echo ($_SESSION['lastname']);?>" ><br><br><br>   
+
+            <label id="method">Choose a Payment Method:</label>
+            <select id="method" name="method">
+            <option value="ideal">IDeal</option>
+            <option value="paypal">PayPal</option>            
+            </select>
+            <br><br>
             <input type="submit" name="payment" value="Buy"><br><br><br><br>
         </form>
     </div> 

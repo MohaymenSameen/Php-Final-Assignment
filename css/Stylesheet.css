@@ -626,3 +626,10 @@ form#import h1
     font-weight: bold;
     font-size: 70px;    
 }
+input.facebook
+{
+    position: relative;
+    left: 40%;
+    top: 200px;
+    width:200px;
+}
