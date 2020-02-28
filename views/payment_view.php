@@ -1,16 +1,44 @@
 <?php
-
+    
     session_start();
+    
     require('../fpdf182/fpdf.php');  
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    require_once "../mollie-api-php/vendor/autoload.php";
+    require_once "../mollie-api-php/examples/functions.php";
+
+    $mollie = new \Mollie\Api\MollieApiClient();
+    $mollie->setApiKey("test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8");
 
     if(!isset($_SESSION['username']))
     {
         header("Location: profile_view.php");
     }
     
-    if(isset($_POST['method']))
+    /*if(isset($_POST['method']))
     {
         
+    }*/
+
+    if(isset($_POST['payment']))
+    {
+        //need to figure out how to make ideal and paypal
+        //$method = $_POST['method'];
+        $payment = $mollie->payments->create([
+            "amount" => [
+                "currency" => "EUR",
+                "value" => "10.00"                
+            ],     
+           // "method" => \Mollie\Api\Types\PaymentMethod::$_POST['method'],      
+            "description" => "Tickets for the Tech event",
+            "redirectUrl" => "https://627650.infhaarlem.nl/order/12345/",
+            "webhookUrl"  => "https://627650.infhaarlem.nl/mollie-webhook/",
+        ]);
+        header("Location: " . $payment->getCheckoutUrl(), true, 303);
     }
     
     
@@ -76,7 +104,7 @@
 
             <label id="method">Choose a Payment Method:</label>
             <select id="method" name="method">
-            <option value="ideal">IDeal</option>
+            <option value="IDEAL">IDEAL</option>
             <option value="paypal">PayPal</option>            
             </select>
             <br><br>
