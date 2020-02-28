@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,15 +13,15 @@
         <h1>TechnoGuides</h1>
         <h2>Your only reliable source for tech news</h2>
     
-        <div class="navigation_bar">
-            
-            <a href="/views/home_view.php">Home</a>
-            <a href="#Laptops">Laptops</a>
-            <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>            
-            <a href="#Tvs">Tvs</a>
-            <a href="/views/searchuser_view.php">Search User</a>
-            <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
+        <div class="navigation_bar">    
+            <a href="home_view.php">Home</a>        
+            <a href="import_view.php">Import Csv</a>
+            <a href="upload_view.php">Upload Image</a>
+            <a href="searchuser_view.php">Search User</a>
+            <a href="payment_view.php">Tickets</a>
+            <a href="searchuser_view.php">Search User</a>                    
+            <a href="edituser_view.php">Edit Details</a>
+            <a href="logout_view.php?logout"><strong>Login/Logout</strong></a>        
         </div>
     </header>    
     
@@ -31,6 +30,13 @@
         <h1>Import CSV File</h1>
         <?php
 
+            session_start();
+
+            if(!isset($_SESSION['username']))
+            {
+                echo '<br>';
+                exit("<p id='error'>You must login to use this feature</p><br>");                               
+            }
             if(isset($_POST['import']))
             {    
                 

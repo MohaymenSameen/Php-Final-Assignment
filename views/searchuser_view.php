@@ -16,13 +16,9 @@
         }
         else
         {
-            exit("no showm");
+            echo "Please Enter at least One Field with captcha";                         
         }                   
-    }
-    else
-    {
-        echo "<p class='error'>please enter atleast one field</p>";                              
-    }
+    }    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,14 +35,15 @@
         <h1>TechnoGuides</h1>
         <h2>Your only reliable source for tech news</h2>
     
-        <div class="navigation_bar">
-            
-            <a href="/views/home_view.php">Home</a>
-            <a href="#Laptops">Laptops</a>
-            <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a>
-            <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
+        <div class="navigation_bar">            
+            <a href="home_view.php">Home</a>
+            <a href="import_view.php">Import Csv</a>
+            <a href="upload_view.php">Upload Image</a>
+            <a href="searchuser_view.php">Search User</a>
+            <a href="payment_view.php">Tickets</a>
+            <a href="searchuser_view.php">Search User</a>                    
+            <a href="edituser_view.php">Edit Details</a>
+            <a href="logout_view.php?logout"><strong>Login/Logout</strong></a>     
         </div>
     </header>
     <div class="background_color">
@@ -54,7 +51,14 @@
             <h1>Search User</h1><br><br>  
             <table name="userdetails"> 
             <?php
-            
+
+                session_start();
+
+                if(!isset($_SESSION['username']))
+                {
+                    echo '<br>';
+                    exit("<p id='error'>You must login to use this feature</p><br>");                               
+                }
       
                 //I made a very extensive query search for email and name, you can either enter only an email or a name and still get results. If you fill in both email and name you stil get the result.
 
@@ -65,8 +69,7 @@
                     $firstname=$mysqli->escape_string($_POST['firstname']);
                     $email_address=$mysqli->escape_string($_POST['email_address']);                    
                     $SearchUserController = new SearchUserController($firstname,$email_address);
-                    //starting a session for captcha and keep changing if page is refreshed
-                    session_start();
+                    //starting a session for captcha and keep changing if page is refreshed                    
                     $code=$_SESSION['captcha'];
                     $user=$_POST['captcha'];
                     $checkemail=$SearchUserController->checkEmail($firstname,$email_address);
@@ -83,7 +86,7 @@
                     //if email field and captcha empty or if firstname and captcha empty
                     if((empty($email_address) && empty($user)) || (empty($firstname)&&empty($user)))
                     {
-                        echo "<p class='error'>Please fill in a field and Captcha.</p>";    
+                        echo "<p id='error'>Please fill in a field and Captcha.</p>";    
                     }
                     //if email field is not empty and firstname field is empty
                     else if(!empty($email_address)&&empty($firstname))
@@ -92,12 +95,12 @@
                         //checking if email not valid and firstname field is empty
                         if(!$validemail && empty($firstname))
                         {                            
-                            echo "<p class='error'>Please enter a Valid Email</p>";
+                            echo "<p id='error'>Please enter a Valid Email</p>";
                         }                                                   
                         //checking if email exists and firstname field is empty  
                         else if(!$checkemail&& empty($firstname))
                         {
-                            echo "<p class='error'>Email Does Not Exist</p>";  
+                            echo "<p id='error'>Email Does Not Exist</p>";  
                         }
                         //user found
                         else
@@ -115,11 +118,11 @@
                                 echo 'Registration Date:  '.$registration;
                                 echo "<br>";
                                 echo "<br>";     
-                                echo "<p class='error'>User Found!</p>";                               
+                                echo "<p id='error'>User Found!</p>";                               
                             }                         
                             else
                             {
-                                echo "<p class='error'>Invalid Captcha</p>";  
+                                echo "<p id='error'>Invalid Captcha</p>";  
                             } 
                         }
                            
@@ -130,7 +133,7 @@
                         //check if username does not exist
                         if(!$checkname)
                         {
-                            echo "<p class='error'>Name does not exist</p>"; 
+                            echo "<p id='error'>Name does not exist</p>"; 
                         }
                         //user found
                         else
@@ -148,11 +151,11 @@
                                 echo 'Registration Date:  '.$registration;
                                 echo "<br>";
                                 echo "<br>";     
-                                echo "<p class='error'>User Found!</p>";                               
+                                echo "<p id='error'>User Found!</p>";                               
                             }                         
                             else
                             {
-                                echo "<p class='error'>Invalid Captcha</p>";  
+                                echo "<p id='error'>Invalid Captcha</p>";  
                             } 
                         }                                               
                     }
@@ -163,7 +166,7 @@
                         //if email not valid
                         if(!$validemail)
                         {
-                            echo "<p class='error'>Please enter a Valid Email</p>";
+                            echo "<p id='error'>Please enter a Valid Email</p>";
                         }
                         //proceed
                         else
@@ -183,22 +186,22 @@
                                     echo 'Registration Date:  '.$registration;
                                     echo "<br>";
                                     echo "<br>";     
-                                    echo "<p class='error'>User Found!</p>";     
+                                    echo "<p id='error'>User Found!</p>";     
                                 }                         
                                 else
                                 {
-                                    echo "<p class='error'>Invalid Captcha</p>";  
+                                    echo "<p id='error'>Invalid Captcha</p>";  
                                 } 
                                 
                             }
                             //not found
                             else
                             {
-                                echo "<p class='error'>User Not Found!</p>";                              
+                                echo "<p id='error'>User Not Found!</p>";                              
                             }                            
                         }                       
                     }                                                         
-                }                                 
+                }                                               
             ?>  
             <br><br>            
             </table>   

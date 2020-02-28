@@ -1,8 +1,6 @@
 <?php
     
-    session_start();
-    
-    require('../fpdf182/fpdf.php');  
+    session_start();    
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -18,56 +16,45 @@
     {
         header("Location: profile_view.php");
     }
-    
-    /*if(isset($_POST['method']))
-    {
-        
-    }*/
 
-    if(isset($_POST['payment']))
+    if(isset($_POST['payment']) && $_POST['method']=="IDEAL")
     {
-        //need to figure out how to make ideal and paypal
-        //$method = $_POST['method'];
-        $payment = $mollie->payments->create([
-            "amount" => [
-                "currency" => "EUR",
-                "value" => "10.00"                
-            ],     
-           // "method" => \Mollie\Api\Types\PaymentMethod::$_POST['method'],      
-            "description" => "Tickets for the Tech event",
-            "redirectUrl" => "https://627650.infhaarlem.nl/order/12345/",
-            "webhookUrl"  => "https://627650.infhaarlem.nl/mollie-webhook/",
-        ]);
+        //need to figure out how to make ideal and paypal     
+        $firstname=$_POST['firstname'];
+        $lastname=$_POST['lastname'];     
+        $payment = $mollie->payments->create(
+            [
+                "amount" =>
+                [
+                    "currency" => "EUR",
+                    "value" => "10.50"                
+                ],     
+            "method" => \Mollie\Api\Types\PaymentMethod::IDEAL,      
+            "description" => "Tickets for the Tech event for $firstname $lastname",
+            "redirectUrl" => "https://627650.infhaarlem.nl/views/return_view.php/",
+            ]
+        );
         header("Location: " . $payment->getCheckoutUrl(), true, 303);
     }
+    else if(isset($_POST['payment']) && $_POST['method']=="INGHOMEPAY")
+    {   
+        $firstname=$_POST['firstname'];
+        $lastname=$_POST['lastname'];
+        $payment = $mollie->payments->create(
+            [
+                "amount" =>
+                [
+                    "currency" => "EUR",
+                    "value" => "10.00"                
+                ],     
+            "method" => \Mollie\Api\Types\PaymentMethod::INGHOMEPAY,      
+            "description" => "Tickets for the Tech event for $firstname $lastname",
+            "redirectUrl" => "https://627650.infhaarlem.nl/views/return_view.php/",
+            ]
+        );
+        header("Location: " . $payment->getCheckoutUrl(), true, 303);
+    }  
     
-    
-    
-    /*if(isset($_POST['payment']))
-    {        
-        $statImage = "../img/logo.png";
-        $qrCode = "../img/qr-code.png";
-        $pdf = new FPDF();
-        $pdf->AddPage();        
-
-        $pdf->SetFont('Arial','B',18);
-        $pdf->Cell(40,10,'Ticket For The Event!');
-
-        $pdf->SetFont('Arial','B',14);
-        $pdf->MultiCell(50,40,$_POST['email_address']);
-
-        $pdf->SetFont('Arial','B',14);
-        $pdf->MultiCell(60,30,$_POST['firstname']);
-
-        $pdf->SetFont('Arial','B',14);
-        $pdf->MultiCell(70,40,$_POST['lastname']);
-
-        $pdf->Image($statImage,150,5,40);
-        $pdf->Image($qrCode,65,80,80);
-
-        $pdf->Output();
-    }*/
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,9 +90,12 @@
             <input type="text" id="email_address" name="lastname" value="<?php echo ($_SESSION['lastname']);?>" ><br><br><br>   
 
             <label id="method">Choose a Payment Method:</label>
+            <br><br>
+            <label style="color: red;">IDEAL has &euro;0.50 extra costs</label>
+            <br><br>
             <select id="method" name="method">
             <option value="IDEAL">IDEAL</option>
-            <option value="paypal">PayPal</option>            
+            <option value="INGHOMEPAY">ING Home Pay</option>            
             </select>
             <br><br>
             <input type="submit" name="payment" value="Buy"><br><br><br><br>

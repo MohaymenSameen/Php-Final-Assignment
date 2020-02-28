@@ -15,13 +15,11 @@
     
         <div class="navigation_bar">
             
-            <a href="/views/home_view.php">Home</a>
-            <a href="#Laptops">Laptops</a>
-            <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a>
-            <a href="/views/searchuser_view.php">Search User</a>
-            <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
+            <a href="home_view.php">Home</a>            
+            <a href="import_view.php">Import Csv</a>
+            <a href="upload_view.php">Upload Image</a>
+            <a href="searchuser_view.php">Search User</a>
+            <a href="login_view.php"><strong>Join/Sign In</strong></a>
         </div>
     </header>    
     
@@ -46,10 +44,8 @@
                         $LoginController = new LoginController($email_address,$password); 
                         //getting errors from controller and displaying them 
                         $error=$LoginController->Login($email_address,$password);    
-                        //"<p class='error'>$error</p>";                        
                     }
-                ?>    
-           
+                ?>            
             <p id="error" style="background-color: white; margin-bottom: 10px;"></p>
             <input type="text" id="email_address" oninput="checkEmail();" name="email_address" placeholder="Email" ><br><br><br>            
             <input type="password" id="password" name="password" placeholder="Password"><br><br><br>

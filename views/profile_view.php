@@ -28,17 +28,14 @@
             }            
         ?> 
         
-        <div class="navigation_bar">
-            
-            <a href="home_view.php">Home</a>
+        <div class="navigation_bar">            
+            <a href="import_view.php">Import Csv</a>
+            <a href="upload_view.php">Upload Image</a>
+            <a href="searchuser_view.php">Search User</a>
             <a href="payment_view.php">Tickets</a>
-            <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a> 
-            <a href="/views/searchuser_view.php">Search User</a>                    
+            <a href="searchuser_view.php">Search User</a>                    
             <a href="edituser_view.php">Edit Details</a>
-            <a href="logout_view.php?logout"><strong>Logout</strong></a>
-               
+            <a href="logout_view.php?logout"><strong>Logout</strong></a>               
         </div>
     </header>
     

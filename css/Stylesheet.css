@@ -54,8 +54,8 @@ header div.navigation_bar a
     display: inline-block;
     color: white;       
     text-decoration: none;
-    padding-left: 3%;  
-    padding-right: 3%; 
+    padding-left: 2%;  
+    padding-right: 2%; 
     height: 100%;
 }
 header div.navigation_bar a:hover
