@@ -8,16 +8,16 @@
             $ResetPassModel=new ResetPassModel($password);            
             if(empty($password) && empty($confpassword))
             {                   
-                echo "<p class='error'>Please enter you new password</p>";
+                echo "<p id='error'>Please enter you new password</p>";
             }
             else if($password!=$confpassword)
             {                    
-                echo "<p class='error'>Passwords do not match!</p>";                
+                echo "<p id='error'>Passwords do not match!</p>";                
             }                
             else
             {
                 $ResetPassModel->updatePass($password);
-                exit ("<p class='error'>Password has been changed</p>");
+                exit ("<p id='error'>Password has been changed</p>");
                 //destroying session so user cannot come back to this page.
                 session_start();
                 session_destroy();

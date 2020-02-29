@@ -16,21 +16,21 @@
             //if firstname or lastname or email empty, then send error message, else if unvalid email send error, else if password not same send error, else if password fields are empty update else the database will update all fields including passwords
             if(empty($firstname)||empty($lastname)||empty($email_address))
             {               
-                echo "<p class='error'>please fill in all fields</p>";
+                echo "<p id='error'>please fill in all fields</p>";
             }
             else if(!filter_var($email_address,FILTER_VALIDATE_EMAIL))
             {               
-                echo "<p class='error'>email is invalid, please select a valid email</p>";                
+                echo "<p id='error'>email is invalid, please select a valid email</p>";                
             }            
             else if ($password!=$confpassword)
             {               
-                echo "<p class='error'>Passwords don't match</p>";
+                echo "<p id='error'>Passwords don't match</p>";
             }                      
             else if(empty($password)&&empty($confpassword)&&!empty($firstname)&&!empty($lastname)&&!empty($email_address))
             {
             
                 $EditUserModel->updateUser($firstname,$lastname,$email_address,$password);                
-                echo "<p class='error'>Database has been updated</p>";
+                echo "<p id='error'>Database has been updated</p>";
                 //sending mail to user to tell them that details have been changed 
                 mail($email_address,"Account Details Changed","You have recently changed some details of your account","From: 627650@student.inholland.nl\r\n");
                 setcookie("username","",time()-3600); 
@@ -46,7 +46,7 @@
                 $EditUserModel->updatePass($firstname,$lastname,$email_address,$password);
                 //sending mail to user to tell them that details have been changed and PASSWORD. 
                 mail($email_address,"Account Details Changed","You have recently changed some details of your account and your password","From: 627650@student.inholland.nl\r\n");                
-                echo "<p class='error'>Database has been updated and passwords have been changed</p>";
+                echo "<p id='error'>Database has been updated and passwords have been changed</p>";
                 //destroying cookie for old user details and making new one for new user
                 setcookie("username","",time()-3600); 
                 setcookie("username",$email_address,time()+3600);
@@ -60,13 +60,12 @@
         }
         //function to delete user
         public function removeUser($firstname,$lastname,$email_address,$password)
-        {
-            
+        {            
             $EditUserModel=new EditUserModel($firstname,$lastname,$email_address,$password);
             $EditUserModel->deleteUser($email_address);
             session_destroy();
             setcookie("username","",time()-3600);
-            echo "<p class='error'>user has been deleted</p>";                   
+            echo "<p id='error'>user has been deleted</p>";                   
         }
     } 
 ?>

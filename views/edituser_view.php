@@ -14,15 +14,14 @@
         <h1>TechnoGuides</h1>
         <h2>Your only reliable source for tech news</h2>
     
-        <div class="navigation_bar">
-            
-            <a href="profile_view.php">Home</a>
-            <a href="#Laptops">Laptops</a>
-            <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a>
-            <a href="/views/searchuser_view.php">Search User</a>
-            <a href="logout_view.php?logout"><strong>Logout</strong></a>
+        <div class="navigation_bar">            
+            <a href="home_view.php">Home</a>
+            <a href="import_view.php">Import Csv</a>
+            <a href="upload_view.php">Upload Image</a>
+            <a href="searchuser_view.php">Search User</a>
+            <a href="payment_view.php">Tickets</a>
+            <a href="edituser_view.php">Edit Details</a>
+            <a href="logout_view.php?logout"><strong>Login/Logout</strong></a>   
         </div>
     </header>    
     
@@ -31,7 +30,12 @@
         <h1>Edit Details</h1><br><br>  
             <?php
                 require_once ('../Db_Connection/db.connection.php');                
-                require_once ('../controllers/edituser_controller.php');             
+                require_once ('../controllers/edituser_controller.php');  
+                session_start(); 
+                if(!isset($_SESSION['username']))
+                {
+                    exit("<p id='error'>You must login to use this feature</p><br>");                                  
+                }       
                 //intializing variables
                 $firstname=null;
                 $lastname=null;
@@ -53,7 +57,8 @@
                 //adding info to textfield from db             
                 echo '<input type="text" name="firstname" placeholder="First Name" value='.$firstname.'><br><br>';
                 echo '<input type="text" name="lastname" placeholder="Last Name" value='.$lastname.'><br><br>';
-                echo '<input type="text" name="email_address" placeholder="Email Address" value='.$email_address.'><br><br>';
+                echo '<p id="error" style="background-color: white; margin-bottom: 10px;"></p>';
+                echo '<input type="text" name="email_address" placeholder="Email Address" oninput="checkEmail();" id="email_address" value='.$email_address.'><br><br>';
                 echo '<h4>Change Password?</h4>';
                 echo '<input type="password" name="password" placeholder="Password"><br><br>';
                 echo '<input type="password" name="confpassword" placeholder="Confirm Password"><br><br>';           
@@ -77,13 +82,7 @@
                 {
                     $EditUserController=new EditUserController($firstname,$lastname,$email_address,$password); 
                     $EditUserController->removeUser($firstname,$lastname,$email_address,$password);
-                }
-                //if no session, person will keep being redirected to home
-                if(!isset($_SESSION['username']))
-                {
-                    header("Location: home_view.php");                                
-                }
-                
+                }               
             ?>  
             <br><br>                
             <input type="submit" name="change" value="Save Changes"><br><br> 
@@ -91,7 +90,8 @@
 
         </form>
     </div> 
-
+    <script src="../js/user.js">      
+    </script>
 </body>
 </html>
 

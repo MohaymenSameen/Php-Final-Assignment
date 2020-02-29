@@ -1,21 +1,3 @@
-<?php
-   /* require_once ('../Db_Connection/db.connection.php');
-    require_once ('../controllers/forgotpass_controller.php');
-    //require_once ('../models/forgotpass_model.php'); 
-
-    if(isset($_COOKIE["username"]))
-    {
-        header("location: profile_view.php");
-    }
-    if(isset($_POST['change']))
-    {
-        $mysqli=new Database();        
-        $email_address=$mysqli->escape_string($_POST['email_address']);
-        $ForgotPassController= new ForgotPassController($email_address);
-        $ForgotPassController->sendEmail($email_address);        
-    }*/
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,15 +14,14 @@
         <h1>TechnoGuides</h1>
         <h2>Your only reliable source for tech news</h2>
     
-        <div class="navigation_bar">
-            
-            <a href="/views/home_view.php">Home</a>
-            <a href="#Laptops">Laptops</a>
-            <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a>
-            <a href="/views/searchuser_view.php">Search User</a>
-            <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
+        <div class="navigation_bar">            
+            <a href="home_view.php">Home</a>
+            <a href="import_view.php">Import Csv</a>
+            <a href="upload_view.php">Upload Image</a>
+            <a href="searchuser_view.php">Search User</a>
+            <a href="payment_view.php">Tickets</a>
+            <a href="edituser_view.php">Edit Details</a>
+            <a href="login_view.php"><strong>Join/Sign In</strong></a>
         </div>
     </header>    
     
@@ -63,14 +44,16 @@
                     $mysqli=new Database();        
                     $email_address=$mysqli->escape_string($_POST['email_address']);
                     $ForgotPassController= new ForgotPassController($email_address);
-                    $ForgotPassController->sendEmail($email_address);        
+                    $ForgotPassController->sendEmail($email_address);      
                 }                  
             ?> 
-            <br><br>               
-            <input type="text" name="email_address" placeholder="Email"><br><br>            
+            <br><br>  
+            <p id="error" style="background-color: white; margin-bottom: 10px;"></p>
+            <input type="text" id="email_address" oninput="checkEmail();" name="email_address" placeholder="Email" ><br><br><br>           
             <input type="submit" name="change" value="Forgot Password"><br><br><br>   
         </form>
     </div> 
-
+    <script src="../js/user.js">      
+    </script>
 </body>
 </html>

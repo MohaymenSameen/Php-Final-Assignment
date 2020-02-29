@@ -17,11 +17,10 @@
             <a href="home_view.php">Home</a>
             <a href="import_view.php">Import Csv</a>
             <a href="upload_view.php">Upload Image</a>
-            <a href="searchuser_view.php">Search User</a>
             <a href="payment_view.php">Tickets</a>
-            <a href="searchuser_view.php">Search User</a>                    
+            <a href="searchuser_view.php">Search User</a>
             <a href="edituser_view.php">Edit Details</a>
-            <a href="logout_view.php?logout"><strong>Login/Logout</strong></a>        
+            <a href="logout_view.php?logout"><strong>Login/Logout</strong></a>     
         </div>
     </header>    
     
@@ -40,15 +39,19 @@
 
             if(isset($_POST['upload']))
             {
+                
                 $file= $_FILES['file'];
-                $fileName = $_FILES['file']['name'];
-                $fileTmpName = $_FILES['file']['tmp_name'];
+                //getting file information and seperating it in variables
+                $fileName = $_FILES['file']['name'];                
+                $fileTmpName = $_FILES['file']['tmp_name'];                
                 $fileSize = $_FILES['file']['size'];
                 $fileError = $_FILES['file']['error'];
                 $fileType = $_FILES['file']['type'];
-        
+                
+                //seperating extension from file 
                 $fileExt = explode('.',$fileName);
                 $fileActualExt = strtolower(end($fileExt));
+                //allowed types
                 $allowed = array('jpg','jpeg','png'); 
         
                 if(in_array($fileActualExt,$allowed))
@@ -57,10 +60,11 @@
                     {
                         if($fileSize>20000)
                         {
+                            //changing filename to a unique id name 
                             $fileNameNew = uniqid('', true).".".$fileActualExt;
-                            $fileDestination = '../uploads/'.$fileNameNew;
+                            $fileDestination = '../uploads/'.$fileNameNew;                        
                             move_uploaded_file($fileTmpName,$fileDestination);
-                            header("Location: upload_view.php?uploadSuccessful");
+                            echo "<p id ='error'>Image Has Been Successfully Uploaded</p>";
                         }
                         else
                         {

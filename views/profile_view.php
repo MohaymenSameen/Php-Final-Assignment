@@ -31,7 +31,6 @@
         <div class="navigation_bar">            
             <a href="import_view.php">Import Csv</a>
             <a href="upload_view.php">Upload Image</a>
-            <a href="searchuser_view.php">Search User</a>
             <a href="payment_view.php">Tickets</a>
             <a href="searchuser_view.php">Search User</a>                    
             <a href="edituser_view.php">Edit Details</a>

@@ -18,18 +18,17 @@
                     //url with the user email
                     $url="http://627650.infhaarlem.nl/views/resetpass_view.php?email_address={$_SESSION['username']}";
                     mail($email_address,"Reset Password","To reset your password, please click the link: $url","From: 627650@student.inholland.nl\r\n");
-                    exit ("<p class='error'>Password has been sent to your email</p>");
-                    header("location: login_view.php");
+                    exit ("<p id='error'>Password has been sent to your email</p><br><br>");
                 }
                 else
                 {
                     //if no email in the database throw error message.
-                    echo "<p class='error'>Email does not exist</p>";
+                    echo "<p id='error'>Email does not exist</p>";
                 }
             }
             else
             {
-                echo "<p class='error'>please enter an email address</p>";                
+                echo "<p id='error'>please enter an email address</p>";                
             }       
         }
     }

@@ -50,7 +50,6 @@
         //getting user info from db
         public function getUser()
         {
-            session_start();
             $sql="SELECT * FROM register WHERE email_address='{$_SESSION['username']}'";
             $result = $this->connect()->query($sql);              
             $row=$result->fetch_assoc();

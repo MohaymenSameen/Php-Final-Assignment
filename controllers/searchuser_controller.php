@@ -32,8 +32,10 @@
         }        
         public function csvDownload($firstname,$email_address, $filename = "export.csv", $delimiter=";")
         {
+            //checking if user exists
             $array= $this->findUser($firstname,$email_address);
-            $f = fopen('php://output', 'w');            
+            
+            $f = fopen('php://output', 'w');   
             foreach ($array as $line) 
             { 
                 fputcsv($f, $line, $delimiter); 

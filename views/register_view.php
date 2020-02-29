@@ -13,15 +13,14 @@
         <h1>TechnoGuides</h1>
         <h2>Your only reliable source for tech news</h2>
     
-        <div class="navigation_bar">
-            
-            <a href="/views/home_view.php">Home</a>
-            <a href="#Laptops">Laptops</a>
-            <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a>
-            <a href="/views/searchuser_view.php">Search User</a>
-            <a href="/views/login_view.php"><strong>Join/Sign In</strong></a>
+        <div class="navigation_bar">            
+            <a href="home_view.php">Home</a>
+            <a href="import_view.php">Import Csv</a>
+            <a href="upload_view.php">Upload Image</a>
+            <a href="searchuser_view.php">Search User</a>
+            <a href="payment_view.php">Tickets</a>
+            <a href="edituser_view.php">Edit Details</a>
+            <a href="login_view.php"><strong>Join/Sign In</strong></a>
         </div>
     </header>
     <div class="background_color">
@@ -55,7 +54,7 @@
                     //if all fields empty display error
                     if(empty($firstname) || empty($lastname) || empty($email_address) || empty($password) || empty($user))
                     {                                 
-                        echo "<p class='error'>Please fill in all the fields</p>";   
+                        echo "<p id='error'>Please fill in all the fields</p>";   
                     }                    
                     //storing if email is valid in a variable and if email exists in db it also is stored in a variable (repeatemail)
                     $validemail=filter_var($email_address,FILTER_VALIDATE_EMAIL);
@@ -64,23 +63,23 @@
                     //if email is not valid display error
                     if(!$validemail)
                     {          
-                        echo "<p class='error'>This is not a valid Email</p>";
+                        echo "<p id='error'>This is not a valid Email</p>";
                     }
                     //if email exists throw error
                     if($RepeatEmail)
                     {
-                        echo "<p class='error'>This email is already being used.</p>";
+                        echo "<p id='error'>This email is already being used.</p>";
                     }
                     //if captcha and is valid email and not repeated email, add user
                     if($code==$user && $validemail && !$RepeatEmail) 
                     {                        
-                        echo "<p class='error'>Valid Captcha</p>";   
+                        echo "<p id='error'>Valid Captcha</p>";   
                         $RegisterController->addUser($firstname,$lastname,$email_address,$password,$registration_date);                                           
                         header("location: login_view.php");
                     }
                     else
                     {
-                        echo "<p class='error'>Invalid Captcha</p>";  
+                        echo "<p id='error'>Invalid Captcha</p>";  
                     }           
                 }
    
@@ -88,12 +87,15 @@
             <br><br>        
             <input type="text" name="firstname" placeholder="First Name"><br><br>
             <input type="text" name="lastname" placeholder="Last Name"><br><br>
-            <input type="text" name="email_address" placeholder="Email Address"><br><br>            
+            <p id="error" style="background-color: white; margin-bottom: 10px;"></p>
+            <input type="text" id="email_address" oninput="checkEmail();" name="email_address" placeholder="Email" ><br><br><br>            
             <input type="text" name="password"  placeholder="Password"><br><br>
             <input type="text" name="captcha" placeholder="Enter Captcha" ><br><img src="/views/captcha.php"><br><br>
             <input type="submit" name="register" value="Register"><br><br><br><br>
 
         </form>
     </div>
+    <script src="../js/user.js">      
+    </script>
 </body>
 </html>

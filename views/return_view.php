@@ -7,7 +7,7 @@
     {
         header("Location: profile_view.php");
     }
-
+    //creation of pdf after user has payed
     if(isset($_POST['download']))
     {
         $statImage = "../img/logo.png";
@@ -27,19 +27,17 @@
         $pdf->SetFont('Arial','B',14);
         $pdf->MultiCell(70,40,$_SESSION['lastname']);
     
+        //adding static images to the pdf
         $pdf->Image($statImage,150,5,40);
         $pdf->Image($qrCode,65,80,80);
     
+        //pdf generation 
+        $pdf->output();    
         
-        $pdf->output();
-    
         $filename='Tickets.pdf';
         header("Content-type:application/pdf");
         header("Content-Disposition:inline;filename='$filename");
-
-       /* $email_address=$_SESSION['username'];
-        $firstname=$_SESSION['firstname'];
-        mail($email_address,"Ticket PDF","Thank you for purchasing a ticket for the event $firstname !","From: 627650@student.inholland.nl\r\n");*/
+       
     }
 ?>
 <!DOCTYPE html>
@@ -57,15 +55,14 @@
         <h1>TechnoGuides</h1>
         <h2>Your only reliable source for tech news</h2>
     
-        <div class="navigation_bar">
-            
-            <a href="/views/home_view.php">Home</a>
-            <a href="#Laptops">Laptops</a>
-            <a href="#Phones">Phones</a>
-            <a href="#Cameras">Cameras</a>
-            <a href="#Tvs">Tvs</a>
-            <a href="/views/searchuser_view.php">Search User</a>
-            <a href="login_view.php"><strong>Join/Sign In</strong></a>
+        <div class="navigation_bar">            
+            <a href="home_view.php">Home</a>
+            <a href="import_view.php">Import Csv</a>
+            <a href="upload_view.php">Upload Image</a>
+            <a href="payment_view.php">Tickets</a>
+            <a href="searchuser_view.php">Search User</a>
+            <a href="edituser_view.php">Edit Details</a>
+            <a href="logout_view.php?logout"><strong>Login/Logout</strong></a>     
         </div>
     </header>    
     

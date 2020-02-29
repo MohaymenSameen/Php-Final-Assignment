@@ -4,19 +4,18 @@
 
     if(isset($_POST['download']))
     {
-        //echo "<p class='error'>User Details Downloading</p>"; 
         $mysqli=new Database();
         $firstname=$mysqli->escape_string($_POST['firstname']);
         $email_address=$mysqli->escape_string($_POST['email_address']);   
         $SearchUserController = new SearchUserController($firstname,$email_address);
-        $result=$SearchUserController->findUser($firstname,$email_address);
+        $result=$SearchUserController->findUser($firstname,$email_address);        
         if($result)
         {
             $csvDownload = $SearchUserController->csvDownload($firstname,$email_address,"$firstname.csv");                 
         }
         else
         {
-            echo "Please Enter at least One Field with captcha";                         
+            echo "User Not Found";                         
         }                   
     }    
 ?>
@@ -39,9 +38,8 @@
             <a href="home_view.php">Home</a>
             <a href="import_view.php">Import Csv</a>
             <a href="upload_view.php">Upload Image</a>
-            <a href="searchuser_view.php">Search User</a>
             <a href="payment_view.php">Tickets</a>
-            <a href="searchuser_view.php">Search User</a>                    
+            <a href="searchuser_view.php">Search User</a>
             <a href="edituser_view.php">Edit Details</a>
             <a href="logout_view.php?logout"><strong>Login/Logout</strong></a>     
         </div>
@@ -75,13 +73,22 @@
                     $checkemail=$SearchUserController->checkEmail($firstname,$email_address);
                     $checkname=$SearchUserController->checkName($firstname,$email_address);
                     $result = $SearchUserController->findUser($firstname,$email_address);
-                    foreach($result as $res)
+
+                    if($result)
                     {
-                        $firstname1 = $res['firstname'];
-                        $lastname = $res["lastname"];
-                        $email_address1 = $res["email_address"];
-                        $registration = $res["registration_date"];                                        
+                        foreach($result as $res)
+                        {
+                            $firstname1 = $res['firstname'];
+                            $lastname = $res["lastname"];
+                            $email_address1 = $res["email_address"];
+                            $registration = $res["registration_date"];                                        
+                        }
                     }
+                    else
+                    {
+                        echo "<p id='error'>User does not exist</p><br>"; 
+                    }
+                    
 
                     //if email field and captcha empty or if firstname and captcha empty
                     if((empty($email_address) && empty($user)) || (empty($firstname)&&empty($user)))
@@ -206,11 +213,14 @@
             <br><br>            
             </table>   
             <input type="text" name="firstname" placeholder="First Name"><br><br> 
-            <input type="text" name="email_address" placeholder="Email Address"><br><br> 
+            <p id="error" style="background-color: white; margin-bottom: 10px;"></p>
+            <input type="text" id="email_address" oninput="checkEmail();" name="email_address" placeholder="Email" ><br><br><br>      
             <input type="text" name="captcha" placeholder="Enter Captcha" ><br><img src="/views/captcha.php"><br><br>
             <input type="submit" name="search" value="Search"><br><br>
             <input type="submit" name="download" value="Download"><br><br>
         </form>
     </div>
+    <script src="../js/user.js">      
+    </script>
 </body>
 </html>
